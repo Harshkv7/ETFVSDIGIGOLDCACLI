@@ -32,6 +32,16 @@ body {
   line-height: 1.6;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
 h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .wrap {
@@ -519,6 +529,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   border-radius: var(--radius);
   padding: 20px 22px;
   margin-bottom: 14px;
+  overflow: hidden;
 }
 
 .etf-select-card .sc-label {
@@ -611,7 +622,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .anchored-charges {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 10px;
 }
 
@@ -620,6 +631,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   border: 1.5px dashed #9DC4BF;
   border-radius: 10px;
   padding: 12px 14px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .ac-label {
@@ -650,6 +663,10 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   padding: 2px 7px;
   border-radius: 999px;
   border: 1px solid #D5E5E2;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ac-input-wrap {
@@ -1250,6 +1267,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .comp-table-wrap {
   overflow-x: auto;
+  max-width: 100%;
   border-radius: 14px;
   border: 1px solid var(--border, #E3E8E7);
   -webkit-overflow-scrolling: touch;
@@ -1688,6 +1706,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .proof-table-wrap {
   overflow-x: auto;
+  max-width: 100%;
   border-radius: 14px;
   border: 1px solid #E3E8E7;
   -webkit-overflow-scrolling: touch;
