@@ -23,18 +23,20 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
   font-size: 16px;
   line-height: 1.6;
-}
-
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
 }
 
 img, svg, video, canvas {
@@ -60,7 +62,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 999px;
-  width: fit-content;
+  max-width: 100%;
 }
 
 .cred-live-dot {
@@ -90,6 +92,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   font-size: 12.5px;
   color: rgba(255,255,255,0.75);
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .cred-num {
@@ -100,7 +103,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 @media (max-width: 600px) {
-  .live-strip { margin-left: 0; margin-right: 0; }
+  .live-strip {
+    max-width: 92%;
+    padding: 8px 12px;
+  }
+  .live-text {
+    font-size: 11px;
+    white-space: normal;
+  }
 }
 
 .hero {
@@ -190,6 +200,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 999px;
   padding: 10px 18px;
+  max-width: 100%;
 }
 
 .hero-challenge .challenge-text {
@@ -211,10 +222,18 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   padding: 5px 11px;
   border-radius: 999px;
   white-space: nowrap;
+  max-width: 100%;
 }
 
 @media (max-width: 600px) {
-  .hero-challenge { flex-direction: column; padding: 14px 16px; }
+  .hero-challenge {
+    flex-direction: column;
+    padding: 14px 16px;
+    border-radius: 20px;
+  }
+  .hero-challenge .challenge-prize {
+    white-space: normal;
+  }
 }
 
 /* ===== PROVOCATION (between challenge and calculator) ===== */
@@ -680,6 +699,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .ac-input-wrap input {
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
   height: 38px;
@@ -692,6 +712,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .ac-pct {
+  flex-shrink: 0;
   padding: 0 12px;
   font-size: 13px;
   font-weight: 700;
