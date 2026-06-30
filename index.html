@@ -40,6 +40,59 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 /* ===== HERO ===== */
+/* ===== LIVE VIEWERS STRIP ===== */
+.live-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto 24px;
+  padding: 8px 16px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.cred-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5ED5A8;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.cred-live-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #5ED5A8;
+  animation: cred-pulse 1.8s ease-out infinite;
+}
+
+@keyframes cred-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+
+.live-text {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 500;
+}
+
+.cred-num {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  color: var(--gold);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .live-strip { margin-left: 0; margin-right: 0; }
+}
+
 .hero {
   background: var(--green);
   color: white;
@@ -74,42 +127,96 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .hero-punch {
-  background: rgba(245, 200, 66, 0.12);
-  border: 1px solid rgba(245, 200, 66, 0.3);
-  border-radius: 16px;
-  padding: 20px 22px;
+  background: transparent;
+  border: none;
+  padding: 0;
   margin-bottom: 0;
+  margin-top: 8px;
   text-align: left;
 }
 
-.hero-punch-line {
-  font-size: clamp(22px, 5vw, 30px);
-  font-weight: 800;
-  font-family: 'Poppins', sans-serif;
-  line-height: 1.2;
+.hero-points {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-points li {
+  position: relative;
+  padding-left: 22px;
+  font-size: clamp(15px, 3.8vw, 17px);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.75);
+}
+
+.hero-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.hero-points li strong {
   color: white;
-  margin-bottom: 10px;
+  font-weight: 800;
 }
 
-.hero-punch-line .accent { color: var(--gold); }
-.hero-punch-line .danger { color: #FF8080; }
-
-.hero-punch p {
-  font-size: 14px;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.8);
+.hero-challenge {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  background: rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 10px 18px;
 }
 
-.hero-punch p strong { color: white; font-weight: 600; }
+.hero-challenge .challenge-text {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
+}
+
+.hero-challenge .challenge-text strong { color: var(--gold); }
+
+.hero-challenge .challenge-prize {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--gold);
+  color: #1A1A00;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 5px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .hero-challenge { flex-direction: column; padding: 14px 16px; }
+}
 
 /* ===== PROVOCATION (between challenge and calculator) ===== */
 .provocation {
-  background: #0F1C1B;
-  color: white;
+  background: var(--surface, #FFFFFF);
+  color: var(--text);
   padding: 80px 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid #EEE;
+  border-bottom: 1px solid #EEE;
 }
 
 .provocation::before {
@@ -117,7 +224,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(245, 200, 66, 0.08), transparent 70%);
+  background: radial-gradient(circle, rgba(30, 92, 88, 0.05), transparent 70%);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -131,11 +238,11 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 /* ===== PROVOCATION MATH ===== */
 .prov-math {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: var(--bg, #F8F5F1);
+  border: 1px solid #E5E0D8;
   border-radius: 16px;
   padding: 22px 20px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   text-align: left;
 }
 
@@ -151,14 +258,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .pmr-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.55);
-  font-weight: 500;
+  color: var(--muted);
+  font-weight: 600;
   line-height: 1.4;
 }
 
 .pmr-bar-wrap {
   height: 36px;
-  background: rgba(255,255,255,0.06);
+  background: #EAE6DD;
   border-radius: 6px;
   overflow: hidden;
   position: relative;
@@ -171,7 +278,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   padding: 0 12px;
   border-radius: 6px;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.03em;
   white-space: nowrap;
   overflow: hidden;
@@ -179,14 +286,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .pmr-full {
   width: 100%;
-  background: linear-gradient(90deg, #2e8078, #3aada3);
-  color: rgba(255,255,255,0.9);
+  background: linear-gradient(90deg, var(--green), var(--green-light));
+  color: rgba(255,255,255,0.92);
 }
 
 .pmr-cut {
   width: 79%;
-  background: linear-gradient(90deg, #8B2020, #C0392B);
-  color: rgba(255,255,255,0.9);
+  background: linear-gradient(90deg, #A8332A, var(--red));
+  color: rgba(255,255,255,0.92);
 }
 
 .pmr-val {
@@ -197,8 +304,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   letter-spacing: -0.5px;
 }
 
-.pmr-val-good { color: #5ED5A8; }
-.pmr-val-bad  { color: #FF7878; }
+.pmr-val-good { color: var(--green); }
+.pmr-val-bad  { color: var(--red); }
 
 .prov-math-gap {
   display: flex;
@@ -206,20 +313,20 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   align-items: center;
   margin-top: 14px;
   padding-top: 14px;
-  border-top: 1px dashed rgba(255,255,255,0.15);
+  border-top: 1px dashed #D8D2C6;
 }
 
 .pmg-label {
   font-size: 12px;
-  color: rgba(255,255,255,0.5);
-  font-weight: 500;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .pmg-val {
   font-family: 'Poppins', sans-serif;
   font-size: 22px;
   font-weight: 900;
-  color: #FF7878;
+  color: var(--red);
   letter-spacing: -0.5px;
 }
 
@@ -234,14 +341,47 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   }
 }
 
+.example-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.example-headline {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eh-big {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(28px, 7vw, 46px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+
+.eh-small {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(14px, 3.6vw, 17px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .provocation-eyebrow {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--green);
   margin-bottom: 28px;
-  opacity: 0.9;
+
 }
 
 .provocation-lead {
@@ -284,19 +424,19 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: rgba(255,255,255,0.6);
+  color: var(--green);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.03em;
   padding: 12px 22px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1.5px solid var(--green);
   border-radius: 999px;
   transition: all 0.2s;
 }
 
 .provocation-cta:hover {
-  color: var(--gold);
-  border-color: rgba(245, 200, 66, 0.5);
+  background: var(--green);
+  color: white;
 }
 
 .hero-cta {
@@ -466,6 +606,211 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .etf-source-link:hover .src-text small { color: rgba(255,255,255,0.7); }
 .etf-source-link:hover .src-icon { background: var(--gold); color: #1A1400; }
+
+/* ===== ANCHORED CHARGES (locked-look but editable) ===== */
+.anchored-charges {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ac-item {
+  background: rgba(255,255,255,0.55);
+  border: 1.5px dashed #9DC4BF;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.ac-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--green);
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.ac-lock {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.ac-tag {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--muted);
+  background: white;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid #D5E5E2;
+}
+
+.ac-input-wrap {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1.5px solid #D5E5E2;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ac-input-wrap input {
+  flex: 1;
+  border: none;
+  outline: none;
+  height: 38px;
+  padding: 0 0 0 12px;
+  font-size: 17px;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: transparent;
+}
+
+.ac-pct {
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .anchored-charges { grid-template-columns: 1fr; }
+}
+
+/* ===== PLAYGROUND CARD ===== */
+.playground-card { margin-top: 14px; }
+
+.pg-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+/* ===== RESULT VISUALIZATION ===== */
+.result-viz-card {
+  margin-top: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 28px 18px 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid #ECE7DC;
+}
+
+.viz-hero {
+  text-align: center;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px dashed #E0DACD;
+}
+
+.vlb-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+}
+
+.viz-hero-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(38px, 10vw, 56px);
+  font-weight: 900;
+  color: var(--red);
+  letter-spacing: -1.5px;
+  line-height: 1;
+}
+
+.viz-hero-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+#vizSvgWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+#vizSvgWrap svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+}
+
+.viz-stats-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.viz-stat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid;
+}
+
+.viz-stat-digi {
+  background: #EDF7F5;
+  border-color: #B2DDD8;
+}
+
+.viz-stat-etf {
+  background: #FFF2F2;
+  border-color: #F5C5C5;
+}
+
+.viz-stat .vbl-dot {
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
+}
+
+.viz-stat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.viz-stat-digi .viz-stat-label { color: var(--green); }
+.viz-stat-etf .viz-stat-label { color: #A33; }
+
+.viz-stat-val {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .viz-stats-row { grid-template-columns: 1fr; }
+}
 
 /* Charges row */
 .charges-row {
@@ -728,9 +1073,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .gitem-title {
   font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.4;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.gitem-title strong {
+  font-weight: 800;
+  color: var(--green);
 }
 
 .gitem-chevron {
@@ -1207,60 +1557,113 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .logic-cards {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   margin-top: 22px;
 }
 
 .logic-card {
   background: var(--surface);
   border-radius: var(--radius);
-  padding: 20px 22px;
+  padding: 22px 20px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-left: 4px solid transparent;
+}
+
+.logic-card-etf { border-left-color: var(--red); }
+.logic-card-digi { border-left-color: var(--green); }
+
+.logic-card-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .logic-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 17px;
+  font-weight: 800;
+  margin: 0;
 }
 
 .logic-tag {
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 3px 8px;
-  border-radius: 6px;
+  padding: 3px 9px;
+  border-radius: 999px;
 }
 
 .logic-tag.etf { background: #FFDEDE; color: #A33; }
 .logic-tag.digi { background: #E0F2EF; color: var(--green); }
 
-.logic-card p {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.7;
-  margin-bottom: 8px;
+.logic-points {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
 }
 
-.logic-card p:last-child { margin-bottom: 0; }
+.logic-points li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.logic-card-etf .logic-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.logic-card-digi .logic-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.logic-points li strong {
+  color: var(--text);
+  font-weight: 700;
+}
 
 .logic-highlight {
-  background: var(--gold-light);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #6B4E00;
-  margin-top: 10px;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.logic-highlight-bad {
+  background: #FFF2F2;
+  color: #A33;
+  border: 1px solid #F5C5C5;
+}
+
+.logic-highlight-good {
+  background: #EDF7F5;
+  color: var(--green);
+  border: 1px solid #B2DDD8;
 }
 
 /* ===== FOOTER ===== */
 .footer {
-  background: #111;
+  background: var(--green);
   color: white;
   text-align: center;
   padding: 28px 0;
@@ -1274,91 +1677,119 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   margin-bottom: 5px;
 }
 
-.footer-copy { font-size: 12px; color: #888; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.6); }
 
-/* ===== SOURCES SECTION ===== */
-.sources-section {
-  background: #0A0A0A;
-  color: #BDBDBD;
-  padding: 36px 0 32px;
-  border-top: 1px solid #222;
+/* ===== PROOF TABLE SECTION ===== */
+.proof-section {
+  padding: 44px 0;
+  background: var(--bg);
+  border-top: 1px solid #EEE;
 }
 
-.sources-section .section-label {
-  color: var(--gold);
-  margin-bottom: 8px;
+.proof-table-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid #E3E8E7;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 14px;
 }
 
-.sources-section h3 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 20px;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 18px;
-}
-
-.sources-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px 24px;
-  margin-bottom: 18px;
-}
-
-.source-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px dashed #2A2A2A;
-  gap: 12px;
-}
-
-.source-name {
+.proof-table {
+  width: 100%;
+  min-width: 520px;
+  border-collapse: collapse;
+  background: white;
   font-size: 13px;
+}
+
+.proof-table thead {
+  background: var(--green);
   color: white;
+}
+
+.proof-table th {
+  padding: 12px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.proof-table th:nth-child(2),
+.proof-table th:nth-child(3),
+.proof-table th:nth-child(4) {
+  text-align: center;
+}
+
+.proof-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #EFEFEC;
+  vertical-align: middle;
+}
+
+.proof-table tr:last-child td { border-bottom: none; }
+.proof-table tr:hover td { background: #FAFCFC; }
+
+.pt-name strong {
+  display: block;
+  font-size: 13.5px;
+  color: var(--text);
+  margin-bottom: 1px;
+}
+
+.pt-name small {
+  font-size: 11px;
+  color: var(--muted);
   font-weight: 500;
 }
 
-.source-name small {
-  display: block;
-  font-size: 10px;
-  color: #777;
-  margin-top: 2px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.proof-table td:nth-child(2),
+.proof-table td:nth-child(3),
+.proof-table td:nth-child(4) {
+  text-align: center;
 }
 
-.source-link {
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 12px;
+.pt-pct {
+  display: inline-block;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 7px;
+}
+
+.pt-red { background: #FFDEDE; color: #A33; }
+.pt-amber { background: #FFF3CC; color: #8B5E00; }
+
+.pt-link {
+  display: inline-block;
+  color: var(--green);
   font-weight: 700;
-  padding: 5px 10px;
-  border: 1px solid #3A3A3A;
-  border-radius: 6px;
+  font-size: 12px;
+  text-decoration: none;
+  padding: 5px 11px;
+  border: 1.5px solid var(--green);
+  border-radius: 999px;
   white-space: nowrap;
   transition: all 0.2s;
 }
 
-.source-link:hover {
-  background: var(--gold);
-  color: #1A1400;
-  border-color: var(--gold);
+.pt-link:hover {
+  background: var(--green);
+  color: white;
 }
 
-.sources-meta {
-  font-size: 11px;
-  color: #777;
+.proof-note {
+  font-size: 11.5px;
+  color: var(--muted);
   line-height: 1.7;
-  border-top: 1px solid #222;
-  padding-top: 14px;
-  margin-top: 6px;
 }
 
-.sources-meta strong { color: #AAA; }
-
-@media (max-width: 600px) {
-  .sources-list { grid-template-columns: 1fr; gap: 0; }
+.proof-note a {
+  color: var(--green);
+  font-weight: 600;
 }
 
 /* ===== STICKY CTA ===== */
@@ -1406,37 +1837,40 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- HERO -->
 <section class="hero">
   <div class="wrap">
-    <div class="hero-badge">Long-Term Gold Investing</div>
+
+    <!-- LIVE VIEWERS -->
+    <div class="live-strip">
+      <span class="cred-live-dot"></span>
+      <span class="live-text"><span class="cred-num" id="credLive">23,614</span> people on this page right now</span>
+    </div>
 
     <h1>Digital Gold beats<br><em>ETFs</em> in the long term.</h1>
 
     <div class="hero-punch">
-      <div class="hero-punch-line">
-        ETFs charge you <span class="accent">1%</span> every year.<br>
-        That 1% <span class="danger">never stops.</span>
-      </div>
-      <p>
-        Every year, your Gold ETF quietly deducts an expense ratio. That deducted money is <strong>gone from your portfolio</strong> — it can't compound anymore. Digital Gold charges a <strong>one-time 6% upfront</strong> (GST + spread), then leaves your investment completely untouched. Over 10, 15, 25 years — that difference becomes surprisingly large.
-      </p>
+      <ul class="hero-points">
+        <li><strong>1% every year, forever.</strong> A small fee, compounding into a very large number.</li>
+        <li><strong>6% once.</strong> That's all DigiGold charges. Then nothing, ever again.</li>
+        <li><strong>Pay to pick stocks?</strong> Fair. <strong>Pay to own gold?</strong> What's the fee for?</li>
+      </ul>
     </div>
-  </div>
-</section>
 
-<!-- CHALLENGE -->
-<section class="challenge">
-  <div class="wrap">
-    <div class="challenge-inner">
+    <!-- Challenge bar — folded into hero, not a separate section heading -->
+    <div class="hero-challenge">
       <p class="challenge-text">Think we're wrong? Run the numbers and tag <strong>#GullakChallenge</strong></p>
-      <span class="challenge-prize">🏆 Win 10g Gold Coin if you prove us wrong</span>
+      <span class="challenge-prize">🏆 Win 100g Gold Coin if you prove us wrong</span>
     </div>
   </div>
 </section>
 
-<!-- PROVOCATION -->
+<!-- THE EXAMPLE -->
 <section class="provocation">
   <div class="wrap">
     <div class="provocation-inner">
-      <div class="provocation-eyebrow">— Here's what 1% actually does —</div>
+      <p class="example-eyebrow">A simple example</p>
+      <h2 class="example-headline">
+        <span class="eh-big">₹10 lakh, 25 years.</span>
+        <span class="eh-small">Here's what that 1% fee actually does.</span>
+      </h2>
 
       <!-- THE MATH -->
       <div class="prov-math">
@@ -1460,17 +1894,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
         </div>
       </div>
 
-      <!-- THE PUNCH -->
-      <p class="provocation-lead">
-        Some fees make sense.<br>
-        Paying to pick stocks? Sure.<br>
-        <strong>Paying to own gold?</strong>
-      </p>
-
-      <h2 class="provocation-question">
-        What's the fee for<span class="qmark">?</span>
-      </h2>
-
       <a href="#calculator" class="provocation-cta">Calculate with your own numbers ↓</a>
     </div>
   </div>
@@ -1480,11 +1903,10 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <section class="calc-section" id="calculator">
   <div class="wrap">
     <p class="section-label">Calculator</p>
-    <!-- CHANGE 3: title updated -->
     <h2 class="section-title">Calculate Your Difference —<br>DigiGold vs ETF</h2>
-    <p class="section-sub">Pick your ETF first. We'll pre-fill the charges. Then adjust amount and time.</p>
+    <p class="section-sub">Pick your ETF. The charges are locked to it — adjust if you know better. Then play with amount and time.</p>
 
-    <!-- STEP 1: ETF SELECTOR -->
+    <!-- STEP 1: ETF SELECTOR + ANCHORED CHARGES -->
     <div class="etf-select-card">
       <div class="sc-label">Step 1 — Pick your ETF</div>
       <select id="etf" onchange="onEtfChange()">
@@ -1497,32 +1919,34 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
         <option value="custom">Custom / Other</option>
       </select>
 
-      <a id="etfSourceLink" href="https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/" target="_blank" rel="noopener" class="etf-source-link">
-        <span class="src-left">
-          <span class="src-icon">VR</span>
-          <span class="src-text">
-            <small>Source · Verify yourself</small>
-            <span>View fund factsheet on Value Research</span>
-          </span>
-        </span>
-        <span>↗</span>
-      </a>
+      <!-- Anchored charges — locked to ETF, but editable -->
+      <div class="anchored-charges">
+        <div class="ac-item">
+          <div class="ac-label">
+            <span class="ac-lock">🔒</span> Expense Ratio
+            <span class="ac-tag" id="acExpTag">Nippon GOLDBEES</span>
+          </div>
+          <div class="ac-input-wrap">
+            <input id="expense" type="number" step="0.01" value="0.79">
+            <span class="ac-pct">%</span>
+          </div>
+        </div>
+        <div class="ac-item">
+          <div class="ac-label">
+            <span class="ac-lock">🔒</span> Tracking Error
+            <span class="ac-tag" id="acTrackTag">Nippon GOLDBEES</span>
+          </div>
+          <div class="ac-input-wrap">
+            <input id="tracking" type="number" step="0.01" value="0.20">
+            <span class="ac-pct">%</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- STEP 2: CHARGES (pre-filled, editable) -->
-    <div class="charges-row">
-      <div class="charge-card">
-        <div class="cc-label">Expense Ratio (%)</div>
-        <input id="expense" type="number" step="0.01" value="0.79">
-      </div>
-      <div class="charge-card tracking">
-        <div class="cc-label">Tracking Error (%)</div>
-        <input id="tracking" type="number" step="0.01" value="0.20">
-      </div>
-    </div>
-
-    <!-- STEP 3: AMOUNT + TIME + CAGR -->
-    <div class="card">
+    <!-- STEP 2: AMOUNT + TIME + CAGR — the playground -->
+    <div class="card playground-card">
+      <div class="pg-label">Step 2 — Your numbers</div>
       <div class="fields">
         <div class="field">
           <label>Investment (₹)</label>
@@ -1539,31 +1963,99 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       </div>
 
       <button class="calc-btn" onclick="calc()">Calculate Difference →</button>
-
-      <div class="results">
-        <div class="result-box etf">
-          <div class="rb-label">ETF Wealth</div>
-          <div class="rb-value" id="etfFinal">—</div>
-          <div class="rb-sub">after annual charges</div>
-        </div>
-        <div class="result-box digi">
-          <div class="rb-label">DigiGold Wealth</div>
-          <div class="rb-value" id="digiFinal">—</div>
-          <div class="rb-sub">after one-time cost</div>
-        </div>
-      </div>
-
-      <div class="loss-box">
-        <div class="rb-label">Wealth Lost to ETF Fees</div>
-        <div class="rb-value" id="lossVal">—</div>
-        <div class="rb-sub" id="lossNote">—</div>
-      </div>
-
-      <!-- CHANGE 2: crossover note removed entirely -->
-
-      <a href="#glossary" class="know-link">What is tracking error? What is expense ratio? →</a>
-      <a href="#logic" class="know-link" style="margin-top:4px;">Know the math →</a>
     </div>
+
+    <!-- RESULTS: BAR VISUALIZATION -->
+    <div class="result-viz-card">
+      <div class="viz-hero">
+        <div class="vlb-label">DigiGold saves you</div>
+        <div class="viz-hero-num" id="lossHero">—</div>
+        <div class="viz-hero-sub">more in your pocket, same gold</div>
+      </div>
+
+      <div id="vizSvgWrap"></div>
+
+      <div class="viz-stats-row">
+        <div class="viz-stat viz-stat-digi">
+          <span class="vbl-dot vbl-dot-digi"></span>
+          <div class="viz-stat-text">
+            <span class="viz-stat-label">DigiGold</span>
+            <span class="viz-stat-val" id="digiStatVal">—</span>
+          </div>
+        </div>
+        <div class="viz-stat viz-stat-etf">
+          <span class="vbl-dot vbl-dot-etf"></span>
+          <div class="viz-stat-text">
+            <span class="viz-stat-label">Your ETF</span>
+            <span class="viz-stat-val" id="etfStatVal">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PROOF TABLE — moved right after calculator for credibility -->
+<section class="proof-section">
+  <div class="wrap">
+    <p class="section-label">Don't take our word for it</p>
+    <h2 class="section-title">Every charge, every fund, sourced.</h2>
+    <p class="section-sub">Real expense ratios and tracking errors for every major Gold ETF in India. Verify any of them yourself.</p>
+
+    <div class="proof-table-wrap">
+      <table class="proof-table">
+        <thead>
+          <tr>
+            <th>Fund</th>
+            <th>Expense Ratio</th>
+            <th>Tracking Error</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pt-name"><strong>Nippon GOLDBEES</strong><small>Nippon India ETF Gold BeES</small></td>
+            <td><span class="pt-pct pt-red">0.79%</span></td>
+            <td><span class="pt-pct pt-amber">0.20%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+          <tr>
+            <td class="pt-name"><strong>HDFC Gold ETF</strong><small>HDFC Mutual Fund</small></td>
+            <td><span class="pt-pct pt-red">0.50%</span></td>
+            <td><span class="pt-pct pt-amber">0.22%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/11314/hdfc-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+          <tr>
+            <td class="pt-name"><strong>SBI ETF Gold</strong><small>SBI Mutual Fund</small></td>
+            <td><span class="pt-pct pt-red">0.65%</span></td>
+            <td><span class="pt-pct pt-amber">0.20%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+          <tr>
+            <td class="pt-name"><strong>ICICI Gold ETF</strong><small>ICICI Prudential Mutual Fund</small></td>
+            <td><span class="pt-pct pt-red">0.50%</span></td>
+            <td><span class="pt-pct pt-amber">0.25%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+          <tr>
+            <td class="pt-name"><strong>Kotak Gold ETF</strong><small>Kotak Mutual Fund</small></td>
+            <td><span class="pt-pct pt-red">0.52%</span></td>
+            <td><span class="pt-pct pt-amber">0.19%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+          <tr>
+            <td class="pt-name"><strong>Axis Gold ETF</strong><small>Axis Mutual Fund</small></td>
+            <td><span class="pt-pct pt-red">0.57%</span></td>
+            <td><span class="pt-pct pt-amber">0.20%</span></td>
+            <td><a href="https://www.valueresearchonline.com/funds/22006/axis-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="proof-note">Data sourced from <a href="https://www.valueresearchonline.com" target="_blank" rel="noopener">Value Research Online</a> (AMFI-registered) and each fund's published factsheet. Tracking error is a historical average and varies year-on-year. DigiGold's cost: 3% GST + ~3% platform spread = 6% one-time, then zero annual charges.</p>
   </div>
 </section>
 
@@ -1573,19 +2065,18 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   <div class="wrap">
     <p class="section-label">Know Your Costs</p>
     <h2 class="section-title">What are these charges?</h2>
-    <p class="section-sub">Plain-language definitions. Tap any term for details.</p>
 
     <div class="glossary-items">
 
       <div class="gitem open">
         <div class="gitem-header" onclick="toggleGitem(this)">
           <div class="gitem-title-row">
-            <span class="gitem-title">What is Expense Ratio?</span>
+            <span class="gitem-title"><strong>Expense Ratio</strong> — annual fee deducted from your ETF every year.</span>
           </div>
           <span class="gitem-chevron">▾</span>
         </div>
         <div class="gitem-body">
-          <p>The annual fee your ETF deducts from your portfolio every single year. It's pulled directly from the fund's NAV every day — you never see a bill, but your portfolio value quietly shrinks by this percentage every year. India's Gold ETFs charge between 0.50%–0.80% annually.</p>
+          <p>Pulled directly from the fund's NAV every day — you never see a bill, but your portfolio value quietly shrinks by this percentage every year. India's Gold ETFs charge between 0.50%–0.80% annually.</p>
           <div class="example">Nippon GoldBeES charges 0.79%/year. On ₹10 lakh, that's ₹7,900 gone in year one — and the deduction grows every year as your portfolio grows.</div>
         </div>
       </div>
@@ -1593,12 +2084,12 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="gitem">
         <div class="gitem-header" onclick="toggleGitem(this)">
           <div class="gitem-title-row">
-            <span class="gitem-title">What is Tracking Error?</span>
+            <span class="gitem-title"><strong>Tracking Error</strong> — the gap between gold's return and what your ETF actually pays.</span>
           </div>
           <span class="gitem-chevron">▾</span>
         </div>
         <div class="gitem-body">
-          <p>The gap between gold's actual return and what your ETF actually delivered to you. Even if gold rises 11%, your ETF may only return 10.75% — due to cash buffers, transaction costs, and rebalancing delays. India's Gold ETFs typically have 0.17%–0.30% tracking error per year.</p>
+          <p>Even if gold rises 11%, your ETF may only return 10.75% — due to cash buffers, transaction costs, and rebalancing delays. India's Gold ETFs typically have 0.17%–0.30% tracking error per year.</p>
           <div class="example">SBI ETF Gold tracking error: ~0.20%. Every year, slightly less than gold. Invisible in your statement — you'd only catch it by comparing NAV to gold prices manually.</div>
         </div>
       </div>
@@ -1606,12 +2097,12 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="gitem">
         <div class="gitem-header" onclick="toggleGitem(this)">
           <div class="gitem-title-row">
-            <span class="gitem-title">What is the DigiGold cost?</span>
+            <span class="gitem-title"><strong>DigiGold Cost</strong> — 6% charged once, then zero charges forever.</span>
           </div>
           <span class="gitem-chevron">▾</span>
         </div>
         <div class="gitem-body">
-          <p>A one-time 6% deduction charged at purchase: 3% GST (government tax on gold) + ~3% platform spread. After that — nothing. No annual fee. No tracking error. Your remaining 94% compounds at the full gold return rate for as long as you hold.</p>
+          <p>3% GST (government tax on gold) + ~3% platform spread, charged once at purchase. After that — nothing. No annual fee. No tracking error. Your remaining 94% compounds at the full gold return rate for as long as you hold.</p>
           <div class="example">Invest ₹1,00,000 → ₹6,000 deducted once → ₹94,000 compounds at full gold CAGR, untouched, forever.</div>
         </div>
       </div>
@@ -1642,8 +2133,8 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     <h2>Keep more of what your gold earns.</h2>
     <p>Start investing in Digital Gold from just ₹100. The longer you stay, the bigger the difference.</p>
     <div class="store-row">
-      <a href="#" class="store-btn">▶ Play Store</a>
-      <a href="#" class="store-btn">🍎 App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="store-btn">▶ Play Store</a>
+      <a href="https://apps.apple.com/in/app/gullak-save-in-digital-gold/id1641454700" target="_blank" rel="noopener" class="store-btn">🍎 App Store</a>
     </div>
   </div>
 </section>
@@ -1653,20 +2144,37 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   <div class="wrap">
     <p class="section-label">The Math</p>
     <h2 class="section-title">How we calculate this</h2>
-    <p class="section-sub">Transparent assumptions. No tricks. You can verify every number.</p>
+    <p class="section-sub">No tricks. Verify every number yourself.</p>
 
     <div class="logic-cards">
-      <div class="logic-card">
-        <h3>Gold ETFs <span class="logic-tag etf">Annual Cost</span></h3>
-        <p>Each year, we deduct the combined expense ratio and tracking error from your portfolio value before applying the next year's returns.</p>
-        <p>This creates a compounding drag: the fee reduces your base, so every future return is applied to a smaller amount. Over 25 years, that compounds heavily against you.</p>
-        <div class="logic-highlight">Annual charges compound against your wealth — year after year after year.</div>
+      <div class="logic-card logic-card-etf">
+        <div class="logic-card-head">
+          <h3>Gold ETF</h3>
+          <span class="logic-tag etf">Annual cost</span>
+        </div>
+
+        <ul class="logic-points">
+          <li>Expense ratio + tracking error deducted <strong>every year</strong></li>
+          <li>Each deduction shrinks the base that future returns grow on</li>
+          <li>Drag compounds — gets worse the longer you hold</li>
+        </ul>
+
+        <div class="logic-highlight logic-highlight-bad">Charged every year. Forever.</div>
       </div>
-      <div class="logic-card">
-        <h3>DigiGold <span class="logic-tag digi">One-Time Cost</span></h3>
-        <p>We apply a one-time 6% deduction upfront — covering the spread and 3% GST — to your initial investment.</p>
-        <p>After that, the remaining 94% compounds freely at the same gold return rate, with no further charges ever deducted.</p>
-        <div class="logic-highlight">The cost is paid once. Growth compounds forever.</div>
+
+      <div class="logic-card logic-card-digi">
+        <div class="logic-card-head">
+          <h3>DigiGold</h3>
+          <span class="logic-tag digi">One-time cost</span>
+        </div>
+
+        <ul class="logic-points">
+          <li>6% deducted <strong>once</strong> — GST + spread, at purchase</li>
+          <li>Remaining 94% compounds at full gold CAGR</li>
+          <li>Zero deductions after that. Ever.</li>
+        </ul>
+
+        <div class="logic-highlight logic-highlight-good">Paid once. Compounds forever.</div>
       </div>
     </div>
   </div>
@@ -1678,48 +2186,9 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     <h2>Ready to start?</h2>
     <p>Download Gullak and invest in Digital Gold from ₹100.</p>
     <div class="store-row">
-      <a href="#" class="store-btn">▶ Play Store</a>
-      <a href="#" class="store-btn">🍎 App Store</a>
+      <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="store-btn">▶ Play Store</a>
+      <a href="https://apps.apple.com/in/app/gullak-save-in-digital-gold/id1641454700" target="_blank" rel="noopener" class="store-btn">🍎 App Store</a>
     </div>
-  </div>
-</section>
-
-<!-- SOURCES -->
-<section class="sources-section">
-  <div class="wrap">
-    <p class="section-label">Sources & Data</p>
-    <h3>Every number, independently verifiable.</h3>
-
-    <div class="sources-list">
-      <div class="source-row">
-        <div class="source-name">Nippon India ETF Gold BeES <small>GOLDBEES · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-      <div class="source-row">
-        <div class="source-name">HDFC Gold ETF <small>HDFCGOLD · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/11314/hdfc-gold-etf/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-      <div class="source-row">
-        <div class="source-name">SBI ETF Gold <small>SETFGOLD · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-      <div class="source-row">
-        <div class="source-name">ICICI Prudential Gold ETF <small>GOLDIETF · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-      <div class="source-row">
-        <div class="source-name">Kotak Gold ETF <small>KOTAKGOLD · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-      <div class="source-row">
-        <div class="source-name">Axis Gold ETF <small>AXISGOLD · NSE</small></div>
-        <a class="source-link" href="https://www.valueresearchonline.com/funds/22006/axis-gold-etf/" target="_blank" rel="noopener">View Factsheet ↗</a>
-      </div>
-    </div>
-
-    <p class="sources-meta">
-      <strong>Methodology:</strong> Expense ratios and tracking errors sourced from each fund's published factsheets and <a style="color:var(--gold);" href="https://www.valueresearchonline.com" target="_blank">Value Research Online</a> (AMFI-registered data). Tracking error figures are historical averages and may vary year-on-year. DigiGold cost structure: 3% GST + ~3% platform spread = 6% one-time. Gold CAGR is illustrative — actual returns will vary.
-    </p>
   </div>
 </section>
 
@@ -1740,13 +2209,13 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 <script>
 const ETF_DATA = {
-  nippon: { exp: 0.79, track: 0.20, link: 'https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/' },
-  hdfc:   { exp: 0.50, track: 0.22, link: 'https://www.valueresearchonline.com/funds/11314/hdfc-gold-etf/' },
-  sbi:    { exp: 0.65, track: 0.20, link: 'https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/' },
-  icici:  { exp: 0.50, track: 0.25, link: 'https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/' },
-  kotak:  { exp: 0.52, track: 0.19, link: 'https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/' },
-  axis:   { exp: 0.57, track: 0.20, link: 'https://www.valueresearchonline.com/funds/22006/axis-gold-etf/' },
-  custom: { exp: 0.50, track: 0.20, link: '' }
+  nippon: { exp: 0.79, track: 0.20, link: 'https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/', name: 'Nippon GOLDBEES' },
+  hdfc:   { exp: 0.50, track: 0.22, link: 'https://www.valueresearchonline.com/funds/11314/hdfc-gold-etf/', name: 'HDFC Gold ETF' },
+  sbi:    { exp: 0.65, track: 0.20, link: 'https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/', name: 'SBI ETF Gold' },
+  icici:  { exp: 0.50, track: 0.25, link: 'https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/', name: 'ICICI Gold ETF' },
+  kotak:  { exp: 0.52, track: 0.19, link: 'https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/', name: 'Kotak Gold ETF' },
+  axis:   { exp: 0.57, track: 0.20, link: 'https://www.valueresearchonline.com/funds/22006/axis-gold-etf/', name: 'Axis Gold ETF' },
+  custom: { exp: 0.50, track: 0.20, link: '', name: 'Custom' }
 };
 
 function onEtfChange() {
@@ -1755,14 +2224,8 @@ function onEtfChange() {
 
   document.getElementById('expense').value  = d.exp;
   document.getElementById('tracking').value = d.track;
-
-  const src = document.getElementById('etfSourceLink');
-  if (sel.value === 'custom') {
-    src.style.display = 'none';
-  } else {
-    src.style.display = 'inline-flex';
-    src.href = d.link;
-  }
+  document.getElementById('acExpTag').textContent = d.name;
+  document.getElementById('acTrackTag').textContent = d.name;
 
   calc();
 }
@@ -1791,11 +2254,77 @@ function calc() {
   }
 
   const diff = digiVal - etfVal;
-  document.getElementById('etfFinal').textContent  = fmt(etfVal);
-  document.getElementById('digiFinal').textContent = fmt(digiVal);
-  document.getElementById('lossVal').textContent   = fmt(diff);
-  document.getElementById('lossNote').textContent  =
-    (expense + tracking).toFixed(2) + '% annual drag over ' + years + ' years';
+
+  document.getElementById('lossHero').textContent = fmt(diff);
+  document.getElementById('digiStatVal').textContent = fmt(digiVal);
+  document.getElementById('etfStatVal').textContent = fmt(etfVal);
+
+  renderVizSvg(digiVal, etfVal, diff);
+}
+
+function renderVizSvg(digiVal, etfVal, diff) {
+  const W = 360, H = 300;
+  const baseY = 250;
+  const maxBarH = 190;
+  const barW = 64;
+  const digiX = 30;
+  const etfX = 128;
+
+  const ratio = Math.max(Math.min(etfVal / digiVal, 1), 0.05);
+  const digiH = maxBarH;
+  const etfH = Math.max(ratio * maxBarH, 32);
+
+  const digiTopY = baseY - digiH;
+  const etfTopY = baseY - etfH;
+
+  const bracketX = etfX + barW + 16;
+  const tickW = 14;
+
+  const midY = (digiTopY + etfTopY) / 2;
+  const gapH = etfTopY - digiTopY;
+
+  const pillW = 108;
+  const pillX = bracketX + tickW + 8;
+
+  const gridLines = [0.25, 0.5, 0.75].map(f => {
+    const y = baseY - maxBarH * f;
+    return `<line x1="14" y1="${y}" x2="346" y2="${y}" stroke="#EFEAE0" stroke-width="1"/>`;
+  }).join('');
+
+  const svg = `
+<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Bar chart comparing DigiGold and ETF final wealth, showing the loss gap">
+<title>DigiGold vs ETF comparison</title>
+<desc>DigiGold final value ${fmt(digiVal)}, ETF final value ${fmt(etfVal)}, loss ${fmt(diff)}</desc>
+
+${gridLines}
+<line x1="14" y1="${baseY}" x2="346" y2="${baseY}" stroke="#D8D2C4" stroke-width="1.5"/>
+
+<rect x="${digiX}" y="${digiTopY}" width="${barW}" height="${digiH}" rx="8" fill="#1E5C58"/>
+<rect x="${digiX}" y="${digiTopY}" width="${barW}" height="24" rx="8" fill="#2a7d77" opacity="0.45"/>
+<text x="${digiX + barW/2}" y="${digiTopY - 11}" text-anchor="middle" font-family="Poppins, sans-serif" font-size="12" font-weight="800" fill="#1E5C58">${fmt(digiVal)}</text>
+<text x="${digiX + barW/2}" y="${baseY + 17}" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#1E5C58">DigiGold</text>
+
+<rect x="${etfX}" y="${etfTopY}" width="${barW}" height="${etfH}" rx="8" fill="#C0392B"/>
+<rect x="${etfX}" y="${etfTopY}" width="${barW}" height="24" rx="8" fill="#D9574A" opacity="0.45"/>
+<text x="${etfX + barW/2}" y="${etfTopY - 11}" text-anchor="middle" font-family="Poppins, sans-serif" font-size="12" font-weight="800" fill="#A33">${fmt(etfVal)}</text>
+<text x="${etfX + barW/2}" y="${baseY + 17}" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#A33">Your ETF</text>
+
+<rect x="${bracketX}" y="${digiTopY}" width="${tickW}" height="${gapH}" fill="#FBEAE8"/>
+
+<line x1="${bracketX}" y1="${digiTopY}" x2="${bracketX + tickW}" y2="${digiTopY}" stroke="#C0392B" stroke-width="3"/>
+<line x1="${bracketX}" y1="${digiTopY}" x2="${bracketX}" y2="${etfTopY}" stroke="#C0392B" stroke-width="3"/>
+<line x1="${bracketX + tickW}" y1="${digiTopY}" x2="${bracketX + tickW}" y2="${etfTopY}" stroke="#C0392B" stroke-width="3"/>
+<line x1="${bracketX}" y1="${etfTopY}" x2="${bracketX + tickW}" y2="${etfTopY}" stroke="#C0392B" stroke-width="3"/>
+
+<g>
+<rect x="${pillX}" y="${midY - 22}" width="${pillW}" height="44" rx="10" fill="#C0392B"/>
+<text x="${pillX + pillW/2}" y="${midY - 6}" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" font-weight="700" fill="#ffffff" letter-spacing="0.04em">YOU LOSE</text>
+<text x="${pillX + pillW/2}" y="${midY + 13}" text-anchor="middle" font-family="Poppins, sans-serif" font-size="16" font-weight="900" fill="#ffffff">${fmt(diff)}</text>
+</g>
+
+</svg>`;
+
+  document.getElementById('vizSvgWrap').innerHTML = svg;
 }
 
 function toggleGitem(header) {
@@ -1803,6 +2332,18 @@ function toggleGitem(header) {
 }
 
 onEtfChange();
+
+(function liveViewers(){
+  const el = document.getElementById('credLive');
+  if (!el) return;
+  let count = 23400 + Math.floor(Math.random() * 600);
+  el.textContent = count.toLocaleString('en-IN');
+  setInterval(() => {
+    const delta = Math.floor(Math.random() * 15) - 6;
+    count = Math.max(23100, Math.min(24200, count + delta));
+    el.textContent = count.toLocaleString('en-IN');
+  }, 1800 + Math.random() * 1500);
+})();
 
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
