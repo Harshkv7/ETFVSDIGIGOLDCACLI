@@ -3210,7 +3210,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <section class="final-cta">
   <div class="wrap">
     <p class="fc-eyebrow">India's most trusted Digital Gold app</p>
-    <h2 class="fc-headline" id="fcHeadline">Start saving the smart way.</h2>
+    <h2 class="fc-headline">Start saving the smart way.</h2>
     <p class="fc-sub">Same gold. No annual fees. Just ₹100 to begin.</p>
 
     <div class="fc-stats">
@@ -3440,20 +3440,12 @@ function calc() {
     }));
   } catch(e) {}
 
-  // Fix 2: Update final CTA headline with personal number
-  const lossFormatted = document.getElementById('lossHero') ? document.getElementById('lossHero').textContent.trim() : '';
-  const fcHeadline = document.getElementById('fcHeadline');
-  if (fcHeadline && lossFormatted && lossFormatted !== '—' && diff > 0) {
-    fcHeadline.textContent = 'You\'ve seen your ' + lossFormatted + '. Start with ₹100.';
-  } else if (fcHeadline) {
-    fcHeadline.textContent = 'Start saving the smart way.';
-  }
-
   // Fix 6: Show floating pill after user calculates
   if (calc.userTriggered && diff > 0) {
     const pill = document.getElementById('floatingPill');
-    if (pill) {
-      pill.querySelector('.fp-loss').textContent = lossFormatted;
+    const lossText = document.getElementById('lossHero') ? document.getElementById('lossHero').textContent.trim() : '';
+    if (pill && lossText) {
+      pill.querySelector('.fp-loss').textContent = lossText;
       pill.style.display = 'flex';
     }
   }
