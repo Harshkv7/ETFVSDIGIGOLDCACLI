@@ -1585,6 +1585,40 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   margin-bottom: 8px;
 }
 
+.testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 24px;
+}
+
+.tcard {
+  background: white;
+  border: 1.5px solid #E5E9E8;
+  border-radius: 16px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--green);
+}
+
+.tcard-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.tcard-text::before { content: '"'; }
+.tcard-text::after  { content: '"'; }
+
+.tcard-meta {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 .why-inline-cta {
   display: inline-flex;
   align-items: center;
@@ -3167,6 +3201,17 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="point-c"><span class="pc-icon">🏅</span> <span class="pc-text"><strong>Redeem your way.</strong> Cash, coins, or jewellery.</span></div>
     </div>
 
+    <div class="testimonials">
+      <div class="tcard">
+        <div class="tcard-text">"Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it to me. Switched to DigiGold the same day."</div>
+        <div class="tcard-meta">Gold ETF investor · 4 years · switched to Gullak</div>
+      </div>
+      <div class="tcard">
+        <div class="tcard-text">"My dad told me ETF is the safest way to hold gold. I sent him this page. He called me back in 10 minutes. We both switched."</div>
+        <div class="tcard-meta">Passive investor · switched with family</div>
+      </div>
+    </div>
+
     <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="why-inline-cta">Invest in DigiGold →</a>
   </div>
 </section>
@@ -3476,7 +3521,7 @@ function shareResult() {
   const lossText = lossEl ? lossEl.textContent.trim() : '';
   const pageUrl = window.location.href.split('?')[0];
 
-  const msg = 'I just calculated this — my Gold ETF would quietly cost me ' + lossText + ' in fees over ' + years + ' years. Check your own number here: ' + pageUrl;
+  const msg = 'Remember when you said Gold ETFs are the best? Just ran the numbers. You were wrong — by ' + lossText + ' in my case. Check yourself: ' + pageUrl;
 
   if (navigator.share) {
     navigator.share({ text: msg }).catch(() => {});
