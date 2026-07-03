@@ -3613,10 +3613,15 @@ function calc() {
 function shareResult() {
   const lossEl = document.getElementById('lossHero');
   const years = document.getElementById('years').value || '25';
-  const lossText = lossEl ? lossEl.textContent.trim() : '';
   const pageUrl = window.location.href.split('?')[0];
 
-  const msg = 'Remember when you said Gold ETFs are the best? Just ran the numbers. You were wrong — by ' + lossText + ' in my case. Check yourself: ' + pageUrl;
+  // Spell out number to avoid WhatsApp payment trigger on decimals
+  const rawLoss = lossEl ? lossEl.textContent.trim()
+    .replace('₹', '')
+    .replace(/\./g, ' point ')
+    .trim() : '';
+
+  const msg = 'Remember when you said Gold ETFs are the best? Just ran the numbers. You were wrong — by ' + rawLoss + ' rupees in my case (' + years + ' years). Check yourself: ' + pageUrl;
 
   if (navigator.share) {
     navigator.share({ text: msg }).catch(() => {});
