@@ -901,16 +901,63 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 .product-detail {
   border-top: 1px dashed #E8E8E4;
-  padding-top: 12px;
+  padding-top: 10px;
   margin-top: 8px;
 }
 
-.product-detail .anchored-charges { margin-bottom: 0; }
+.pf-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.pf-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8B6000;
+  flex: 1;
+}
+
+.pf-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border: 1.5px solid #E8DCB0;
+  border-radius: 8px;
+  padding: 5px 10px;
+  min-width: 80px;
+  justify-content: flex-end;
+}
+
+.pf-input {
+  width: 36px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  text-align: right;
+  padding: 0;
+}
+
+.pf-unit {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+  min-width: 24px;
+}
 
 .product-note {
   font-size: 11.5px;
   color: var(--muted);
   line-height: 1.6;
+  margin-top: 4px;
 }
 
 .product-note strong { color: var(--text); font-weight: 700; }
@@ -2770,10 +2817,32 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 
 /* Social proof counter */
 .calc-counter {
-  font-size: 11px;
-  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
   margin-bottom: 16px;
-  font-weight: 600;
+  background: #EAF3F2;
+  border: 1px solid #C0DDD9;
+  border-radius: 999px;
+  padding: 5px 12px 5px 8px;
+}
+
+.calc-counter::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  flex-shrink: 0;
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
 }
 
 /* Try longterm button inside warning */
@@ -2925,9 +2994,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- CALCULATOR -->
 <section class="calc-section" id="calculator">
   <div class="wrap">
-    <p class="section-label">Calculator</p>
     <h2 class="section-title">Calculate Your Difference</h2>
-    <p class="section-sub">Pick your ETF, pick what to compare it against, then play with amount and time.</p>
     <p class="calc-counter" id="calcCounter"></p>
 
     <!-- STEP 1 + 2: SIDE BY SIDE -->
@@ -2975,20 +3042,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
           <p class="product-note">One-time cost: <strong>3% GST + 3% spread = 6%</strong>. No annual charges, ever.</p>
         </div>
         <div class="product-detail" id="detail-coin" style="display:none;">
-          <div class="anchored-charges">
-            <div class="ac-chip"><span class="ac-chip-label">Making</span><input id="coinMaking" type="number" step="0.1" value="3"><span class="ac-chip-pct">%</span></div>
-            <div class="ac-chip"><span class="ac-chip-label">GST</span><input id="coinGst" type="number" step="0.1" value="3"><span class="ac-chip-pct">%</span></div>
-            <div class="ac-chip"><span class="ac-chip-label">Locker</span><input id="coinLocker" type="number" step="0.01" value="0.10"><span class="ac-chip-pct">%/yr</span></div>
-          </div>
-          <p class="product-note">One-time: making charge + GST. Plus a small annual locker/storage fee.</p>
+          <div class="pf-row"><span class="pf-label">Making</span><div class="pf-input-wrap"><input id="coinMaking" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
+          <div class="pf-row"><span class="pf-label">GST</span><div class="pf-input-wrap"><input id="coinGst" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
+          <div class="pf-row"><span class="pf-label">Locker</span><div class="pf-input-wrap"><input id="coinLocker" type="number" step="0.01" value="0.10" class="pf-input"><span class="pf-unit">%/yr</span></div></div>
         </div>
         <div class="product-detail" id="detail-jewellery" style="display:none;">
-          <div class="anchored-charges">
-            <div class="ac-chip"><span class="ac-chip-label">Making</span><input id="jewelMaking" type="number" step="0.1" value="6"><span class="ac-chip-pct">%</span></div>
-            <div class="ac-chip"><span class="ac-chip-label">GST</span><input id="jewelGst" type="number" step="0.1" value="3"><span class="ac-chip-pct">%</span></div>
-            <div class="ac-chip"><span class="ac-chip-label">Locker</span><input id="jewelLocker" type="number" step="0.01" value="0.10"><span class="ac-chip-pct">%/yr</span></div>
-          </div>
-          <p class="product-note">One-time: making charge + GST. Plus a small annual locker/storage fee.</p>
+          <div class="pf-row"><span class="pf-label">Making</span><div class="pf-input-wrap"><input id="jewelMaking" type="number" step="0.1" value="6" class="pf-input"><span class="pf-unit">%</span></div></div>
+          <div class="pf-row"><span class="pf-label">GST</span><div class="pf-input-wrap"><input id="jewelGst" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
+          <div class="pf-row"><span class="pf-label">Locker</span><div class="pf-input-wrap"><input id="jewelLocker" type="number" step="0.01" value="0.10" class="pf-input"><span class="pf-unit">%/yr</span></div></div>
         </div>
       </div>
 
@@ -3030,7 +3091,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="viz-hero">
         <div class="vlb-label" id="vlbLabel">Your ETF eats</div>
         <div class="viz-hero-num" id="lossHero">—</div>
-        <div class="viz-hero-sub" id="vhSub">that DigiGold would have kept, for the same gold</div>
       </div>
 
       <div class="vs-row">
@@ -3064,9 +3124,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- PROOF TABLE — moved right after calculator for credibility -->
 <section class="proof-section">
   <div class="wrap">
-    <p class="section-label">Don't take our word for it</p>
-    <h2 class="section-title">Every charge, every fund, sourced.</h2>
-    <p class="section-sub">Real expense ratios and tracking errors for every major Gold ETF in India. Verify any of them yourself.</p>
+    <h2 class="section-title">The actual numbers. Verify yourself.</h2>
 
     <div class="proof-table-wrap">
       <table class="proof-table">
@@ -3133,7 +3191,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- GLOSSARY -->
 <section class="glossary-section" id="glossary">
   <div class="wrap">
-    <p class="section-label">Know Your Costs</p>
     <h2 class="section-title">What are these charges?</h2>
 
     <div class="glossary-items">
@@ -3185,11 +3242,9 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <section class="why-section">
   <div class="wrap">
     <h2 class="why-headline">Want to avoid these charges?<br>Invest in DigiGold.</h2>
-    <p class="section-sub">Fewer deductions. Faster compounding.</p>
 
     <div class="points-compact">
       <div class="point-c"><span class="pc-icon">🚫</span> <span class="pc-text"><strong>Zero annual fees.</strong> One-time cost. Then nothing.</span></div>
-      <div class="point-c"><span class="pc-icon">📈</span> <span class="pc-text"><strong>Pure compounding.</strong> 100% of capital grows at gold's rate.</span></div>
       <div class="point-c"><span class="pc-icon">💸</span> <span class="pc-text"><strong>Start from ₹100.</strong> No demat. No broker. No minimum.</span></div>
       <div class="point-c"><span class="pc-icon">🏅</span> <span class="pc-text"><strong>Redeem your way.</strong> Cash, coins, or jewellery.</span></div>
     </div>
@@ -3404,7 +3459,7 @@ function setProduct(product) {
 
   const label = PRODUCT_LABELS[product];
   document.getElementById('vlbLabel').textContent = 'Your ETF eats';
-  document.getElementById('vhSub').textContent = label.sub;
+  if (document.getElementById('vhSub')) document.getElementById('vhSub').textContent = label.sub;
   document.getElementById('digiStatLabel').textContent = label.name;
 
   calc();
@@ -3508,14 +3563,14 @@ function calc() {
   if (diff < 0) {
     // ETF wins at this horizon
     vlb.textContent = 'At this horizon, ETF beats ' + PRODUCT_LABELS[currentProduct].name + ' by';
-    vhs.textContent = 'Try 15+ years to see ' + PRODUCT_LABELS[currentProduct].name + ' pull ahead';
+    if (vhs) vhs.textContent = 'Try 15+ years to see ' + PRODUCT_LABELS[currentProduct].name + ' pull ahead';
     if (lossHeroEl) lossHeroEl.style.color = 'var(--green)';
     if (digiCard) { digiCard.classList.remove('vs-card-good'); digiCard.classList.add('vs-card-neutral'); }
     if (etfCard)  { etfCard.classList.remove('vs-card-bad');   etfCard.classList.add('vs-card-win'); }
   } else {
     // DigiGold / product wins
     vlb.textContent = 'Your ETF eats';
-    vhs.textContent = PRODUCT_LABELS[currentProduct].sub;
+    if (vhs) vhs.textContent = PRODUCT_LABELS[currentProduct].sub;
     if (lossHeroEl) lossHeroEl.style.color = 'var(--red)';
     if (digiCard) { digiCard.classList.add('vs-card-good'); digiCard.classList.remove('vs-card-neutral'); }
     if (etfCard)  { etfCard.classList.add('vs-card-bad');  etfCard.classList.remove('vs-card-win'); }
