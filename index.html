@@ -3615,13 +3615,23 @@ function shareResult() {
   const years = document.getElementById('years').value || '25';
   const pageUrl = window.location.href.split('?')[0];
 
-  // Spell out number to avoid WhatsApp payment trigger on decimals
-  const rawLoss = lossEl ? lossEl.textContent.trim()
-    .replace('₹', '')
-    .replace(/\./g, ' point ')
-    .trim() : '';
+  // Round to nearest lakh, no decimals, no ₹, no WA payment trigger
+  let lossInLakhs = '';
+  if (lossEl) {
+    const txt = lossEl.textContent.trim();
+    // Parse the formatted number e.g. "₹22 L" or "₹1.28 Cr"
+    const crMatch = txt.match(/([\d.]+)\s*Cr/);
+    const lMatch  = txt.match(/([\d.]+)\s*L/);
+    if (crMatch) {
+      lossInLakhs = Math.round(parseFloat(crMatch[1]) * 100) + ' Lakhs';
+    } else if (lMatch) {
+      lossInLakhs = Math.round(parseFloat(lMatch[1])) + ' Lakhs';
+    } else {
+      lossInLakhs = txt.replace('₹','').trim();
+    }
+  }
 
-  const msg = 'Remember when you said Gold ETFs are the best? Just ran the numbers. You were wrong — by ' + rawLoss + ' rupees in my case (' + years + ' years). Check yourself: ' + pageUrl;
+  const msg = 'Remember when you said Gold ETFs are the best? Just ran the numbers. You were wrong — by ' + lossInLakhs + ' in my case (' + years + ' years). Check yourself: ' + pageUrl;
 
   if (navigator.share) {
     navigator.share({ text: msg }).catch(() => {});
