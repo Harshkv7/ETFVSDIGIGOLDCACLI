@@ -2124,40 +2124,37 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   line-height: 1.6;
 }
 
-.store-row {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.store-btn {
-  height: 46px;
-  padding: 0 18px;
-  border-radius: var(--radius-sm);
-  background: rgba(255,255,255,0.15);
-  color: white;
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
+.download-btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  border: 1px solid rgba(255,255,255,0.3);
-  transition: background 0.2s;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #1A1400;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 16px 36px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 20px rgba(242,195,53,0.4);
+  transition: transform 0.15s;
 }
 
-.store-btn:hover { background: rgba(255,255,255,0.25); }
+.download-btn:hover { transform: translateY(-2px); }
 
-.store-icon {
+.dl-icon {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
 }
 
-.final-cta .store-icon {
-  color: var(--green);
-}
+/* Show android icon by default, apple on iOS via JS class */
+.dl-apple { display: none; }
+
 
 /* ===== FINAL CTA ===== */
 .final-cta {
@@ -3112,7 +3109,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <p class="insight-line" id="insightLine" style="display:none;"></p>
 
       <div class="result-cta" id="resultCta" style="display:none;">
-        <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="result-cta-btn">Find the best way to invest in Digital Gold →</a>
+        <button onclick="downloadApp()" class="result-cta-btn">Find the best way to invest in Digital Gold →</button>
         <button class="result-share-btn" id="shareBtn" onclick="shareResult()">Someone told you ETFs are best? Time to reply.</button>
       </div>
     </div>
@@ -3303,7 +3300,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       </div>
     </div>
 
-    <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="why-inline-cta">Invest in DigiGold →</a>
+    <button onclick="downloadApp()" class="why-inline-cta">Invest in DigiGold →</button>
   </div>
 </section>
 
@@ -3361,24 +3358,19 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       </div>
     </div>
 
-    <div class="store-row">
-      <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="store-btn" id="storeBtn1">
-        <svg class="store-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M3.6 2.3 13.8 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1Z" fill="#00D2FF"/>
-          <path d="M16.9 9.1 13.8 12l3.1 2.9 4-2.3c.7-.4.7-1.8 0-2.2l-4-2.3Z" fill="#FFC107"/>
-          <path d="M3.6 2.3c.2-.1.5-.2.7-.2.3 0 .6.1.9.2l11.7 6.8-3.1 2.9L3.6 2.3Z" fill="#00F076"/>
-          <path d="M3.6 21.7 13.8 12l3.1 2.9-11.7 6.8c-.3.2-.6.2-.9.2-.2 0-.5 0-.7-.2Z" fill="#FF3A44"/>
-        </svg>
-        <span>Play Store</span>
-      </a>
-      <a href="https://apps.apple.com/in/app/gullak-save-in-digital-gold/id1641454700" target="_blank" rel="noopener" class="store-btn" id="storeBtn2">
-        <svg class="store-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="M16.4 12.8c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.1-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3.1 2.4 1.2-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.6-1-2.7-3.9Z"/>
-          <path d="M14.1 5.7c.7-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.4Z"/>
-        </svg>
-        <span>App Store</span>
-      </a>
-    </div>
+    <button onclick="downloadApp()" class="download-btn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="dl-icon dl-android">
+        <path d="M3.6 2.3 13.8 12 3.6 21.7c-.4-.2-.6-.6-.6-1.1V3.4c0-.5.2-.9.6-1.1Z" fill="#00D2FF"/>
+        <path d="M16.9 9.1 13.8 12l3.1 2.9 4-2.3c.7-.4.7-1.8 0-2.2l-4-2.3Z" fill="#FFC107"/>
+        <path d="M3.6 2.3c.2-.1.5-.2.7-.2.3 0 .6.1.9.2l11.7 6.8-3.1 2.9L3.6 2.3Z" fill="#00F076"/>
+        <path d="M3.6 21.7 13.8 12l3.1 2.9-11.7 6.8c-.3.2-.6.2-.9.2-.2 0-.5 0-.7-.2Z" fill="#FF3A44"/>
+      </svg>
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg" class="dl-icon dl-apple">
+        <path d="M16.4 12.8c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.1-2.9.9-3.7.9-.8 0-1.9-.9-3.2-.8-1.6 0-3.1 1-4 2.4-1.7 3-.4 7.4 1.2 9.8.8 1.2 1.8 2.5 3.1 2.4 1.2-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8-.1 0-2.6-1-2.7-3.9Z"/>
+        <path d="M14.1 5.7c.7-.8 1.1-1.9 1-3-1 0-2.2.6-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.5 2.9-1.4Z"/>
+      </svg>
+      Download Now
+    </button>
 
     <p class="fc-trust">24K gold · 99.9% pure · Secured & insured vaults</p>
   </div>
@@ -3669,17 +3661,19 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // Auto-run calc on load so result is never empty
-window.addEventListener('DOMContentLoaded', () => {
-  // Fix 1: OS detection — show relevant store button prominently
+const PLAY_URL = 'https://play.google.com/store/apps/details?id=com.finternet.plutus';
+const APP_URL  = 'https://apps.apple.com/in/app/gullak-save-in-digital-gold/id1641454700';
+
+function downloadApp() {
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const isAndroid = /Android/.test(navigator.userAgent);
-  const storeRow = document.querySelector('.store-row');
-  if (storeRow) {
-    if (isIOS) {
-      document.getElementById('storeBtn1').style.display = 'none'; // hide Play Store
-    } else if (isAndroid) {
-      document.getElementById('storeBtn2').style.display = 'none'; // hide App Store
-    }
+  window.open(isIOS ? APP_URL : PLAY_URL, '_blank');
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  // Swap store icon for iOS
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+    document.querySelectorAll('.dl-android').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.dl-apple').forEach(el => el.style.display = 'block');
   }
 
   // Fix 4: localStorage — restore last calculation
