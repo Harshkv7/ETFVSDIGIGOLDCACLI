@@ -2920,7 +2920,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
           <input id="cagr" type="number" value="11" oninput="updateCagrLabel()">
         </div>
       </div>
-      <button class="calc-btn" onclick="calc()">Calculate Difference →</button>
+      <button class="calc-btn" onclick="calc.userTriggered=true; calc()">Calculate Difference →</button>
     </div>
 
     <!-- RESULTS: DIRECT NUMBER COMPARISON -->
@@ -3355,6 +3355,12 @@ function calc() {
   animateCountUp(etfStatEl, etfVal, true, 1000);
   setTimeout(() => lossEl.classList.remove('counting'), 1000);
 
+  // Auto-scroll to result — only when user triggered, not on initial load
+  if (calc.userTriggered) {
+    const resultCard = document.querySelector('.result-viz-card');
+    if (resultCard) setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
   // Insight line — shows below result when DigiGold wins
   const insightLine = document.getElementById('insightLine');
   const resultCtaEl = document.getElementById('resultCta');
@@ -3423,6 +3429,12 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const t = document.querySelector(a.getAttribute('href'));
     if (t) t.scrollIntoView({ behavior: 'smooth' });
   });
+});
+
+// Auto-run calc on load so result is never empty
+window.addEventListener('DOMContentLoaded', () => {
+  calc.userTriggered = false;
+  calc();
 });
 </script>
 </body>
