@@ -751,11 +751,27 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: white;
-  border: 1.5px dashed #9DC4BF;
   border-radius: 999px;
   padding: 4px 10px 4px 8px;
 }
+
+/* Locked state — preset ETF */
+.chips-locked .ac-chip {
+  background: #F0F4F3;
+  border: 1.5px solid #D5E0DE;
+}
+
+.chips-locked .ac-chip-label { color: var(--muted); }
+.chips-locked .ac-chip input { color: var(--muted); font-size: 11px; }
+
+/* Editable state — custom ETF */
+.chips-editable .ac-chip {
+  background: white;
+  border: 1.5px dashed #9DC4BF;
+}
+
+.chips-editable .ac-chip-label { color: var(--green); }
+.chips-editable .ac-chip input { color: var(--text); font-size: 11px; }
 
 .ac-chip-lock {
   font-size: 9px;
@@ -2953,17 +2969,17 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
           <option value="zerodha">Zerodha Gold ETF (GOLDCASE)</option>
           <option value="custom">Custom / Other</option>
         </select>
-        <div class="anchored-charges">
+        <div class="anchored-charges chips-locked" id="anchoredCharges">
           <div class="ac-chip">
-            <span class="ac-chip-lock">🔒</span>
+            <span class="ac-chip-lock" id="chipLock1">🔒</span>
             <span class="ac-chip-label">Expense</span>
-            <input id="expense" type="number" step="0.01" value="0.79" oninput="updateTotalDrag()">
+            <input id="expense" type="number" step="0.01" value="0.79" oninput="updateTotalDrag()" readonly>
             <span class="ac-chip-pct">%</span>
           </div>
           <div class="ac-chip">
-            <span class="ac-chip-lock">🔒</span>
+            <span class="ac-chip-lock" id="chipLock2">🔒</span>
             <span class="ac-chip-label">Tracking</span>
-            <input id="tracking" type="number" step="0.01" value="0.20" oninput="updateTotalDrag()">
+            <input id="tracking" type="number" step="0.01" value="0.20" oninput="updateTotalDrag()" readonly>
             <span class="ac-chip-pct">%</span>
           </div>
         </div>
@@ -3102,25 +3118,25 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
             <td class="pt-name"><strong>SBI ETF Gold</strong><small>SBI AMC</small></td>
             <td><span class="pt-pct pt-red">0.65%</span></td>
             <td><span class="pt-pct pt-amber">0.20%</span></td>
-            <td><a href="https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+            <td><a href="https://www.valueresearchonline.com/funds/10382/sbi-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
           </tr>
           <tr>
             <td class="pt-name"><strong>ICICI Gold ETF</strong><small>ICICI Prudential AMC</small></td>
             <td><span class="pt-pct pt-red">0.50%</span></td>
             <td><span class="pt-pct pt-amber">0.25%</span></td>
-            <td><a href="https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+            <td><a href="https://www.valueresearchonline.com/funds/11347/icici-prudential-gold-exchange-traded-fund/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
           </tr>
           <tr>
             <td class="pt-name"><strong>Kotak Gold ETF</strong><small>Kotak AMC</small></td>
             <td><span class="pt-pct pt-red">0.52%</span></td>
             <td><span class="pt-pct pt-amber">0.19%</span></td>
-            <td><a href="https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+            <td><a href="https://www.valueresearchonline.com/funds/5341/kotak-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
           </tr>
           <tr>
             <td class="pt-name"><strong>Axis Gold ETF</strong><small>Axis AMC</small></td>
             <td><span class="pt-pct pt-red">0.57%</span></td>
             <td><span class="pt-pct pt-amber">0.20%</span></td>
-            <td><a href="https://www.valueresearchonline.com/funds/22006/axis-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
+            <td><a href="https://www.valueresearchonline.com/funds/11669/axis-gold-etf/" target="_blank" rel="noopener" class="pt-link">View ↗</a></td>
           </tr>
           <tr>
             <td class="pt-name"><strong>Zerodha GOLDCASE</strong><small>Zerodha AMC</small></td>
@@ -3307,10 +3323,10 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 const ETF_DATA = {
   nippon:  { exp: 0.79, track: 0.20, link: 'https://www.valueresearchonline.com/funds/4957/nippon-india-etf-gold-bees/', name: 'Nippon GOLDBEES' },
   hdfc:    { exp: 0.50, track: 0.22, link: 'https://www.valueresearchonline.com/funds/11314/hdfc-gold-etf/', name: 'HDFC Gold ETF' },
-  sbi:     { exp: 0.65, track: 0.20, link: 'https://www.valueresearchonline.com/funds/11688/sbi-etf-gold/', name: 'SBI ETF Gold' },
-  icici:   { exp: 0.50, track: 0.25, link: 'https://www.valueresearchonline.com/funds/14948/icici-prudential-gold-exchange-traded-fund/', name: 'ICICI Gold ETF' },
-  kotak:   { exp: 0.52, track: 0.19, link: 'https://www.valueresearchonline.com/funds/11687/kotak-gold-etf/', name: 'Kotak Gold ETF' },
-  axis:    { exp: 0.57, track: 0.20, link: 'https://www.valueresearchonline.com/funds/22006/axis-gold-etf/', name: 'Axis Gold ETF' },
+  sbi:     { exp: 0.65, track: 0.20, link: 'https://www.valueresearchonline.com/funds/10382/sbi-gold-etf/', name: 'SBI ETF Gold' },
+  icici:   { exp: 0.50, track: 0.25, link: 'https://www.valueresearchonline.com/funds/11347/icici-prudential-gold-exchange-traded-fund/', name: 'ICICI Gold ETF' },
+  kotak:   { exp: 0.52, track: 0.19, link: 'https://www.valueresearchonline.com/funds/5341/kotak-gold-etf/', name: 'Kotak Gold ETF' },
+  axis:    { exp: 0.57, track: 0.20, link: 'https://www.valueresearchonline.com/funds/11669/axis-gold-etf/', name: 'Axis Gold ETF' },
   zerodha: { exp: 0.33, track: 0.56, link: 'https://www.valueresearchonline.com/funds/44177/zerodha-gold-etf/', name: 'Zerodha GOLDCASE' },
   custom:  { exp: 1.00, track: 0.00, link: '', name: 'Custom' }
 };
@@ -3318,10 +3334,30 @@ const ETF_DATA = {
 function onEtfChange() {
   const sel = document.getElementById('etf');
   const d = ETF_DATA[sel.value];
+  const isCustom = sel.value === 'custom';
 
-  document.getElementById('expense').value  = d.exp;
-  document.getElementById('tracking').value = d.track;
+  const expInput = document.getElementById('expense');
+  const trkInput = document.getElementById('tracking');
+  const charges = document.getElementById('anchoredCharges');
 
+  expInput.value  = d.exp;
+  trkInput.value  = d.track;
+
+  // Toggle editable state
+  expInput.readOnly = !isCustom;
+  trkInput.readOnly = !isCustom;
+
+  if (isCustom) {
+    charges.classList.add('chips-editable');
+    charges.classList.remove('chips-locked');
+    document.querySelectorAll('.ac-chip-lock').forEach(l => l.textContent = '✏️');
+  } else {
+    charges.classList.add('chips-locked');
+    charges.classList.remove('chips-editable');
+    document.querySelectorAll('.ac-chip-lock').forEach(l => l.textContent = '🔒');
+  }
+
+  updateTotalDrag();
   calc();
 }
 
@@ -3475,6 +3511,7 @@ function calc() {
   if (calc.userTriggered) {
     const resultCard = document.querySelector('.result-viz-card');
     if (resultCard) setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    calc.userTriggered = false; // reset so dropdown changes don't scroll
   }
 
   // Fix 4: Save to localStorage
