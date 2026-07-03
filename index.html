@@ -1601,38 +1601,61 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   margin-bottom: 8px;
 }
 
-.testimonials {
+.testimonials-wrap {
+  margin: 24px -20px;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.testimonials-track {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 20px 0 24px;
+  gap: 12px;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.testimonials-track:hover { animation-play-state: paused; }
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .tcard {
   background: white;
   border: 1.5px solid #E5E9E8;
-  border-radius: 16px;
-  padding: 16px 18px;
+  border-radius: 14px;
+  padding: 12px 14px;
   border-left: 3px solid var(--green);
+  width: 220px;
+  flex-shrink: 0;
 }
 
 .tcard-text {
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.65;
   color: var(--text);
   font-style: italic;
   margin-bottom: 10px;
 }
 
-.tcard-text::before { content: '"'; }
-.tcard-text::after  { content: '"'; }
-
 .tcard-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.tcard-name {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.tcard-tag {
+  font-size: 10px;
+  font-weight: 600;
   color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .why-inline-cta {
@@ -2768,52 +2791,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   cursor: pointer;
 }
 
-/* Floating pill */
-.floating-pill {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--text);
-  color: white;
-  border-radius: 999px;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  z-index: 999;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  white-space: nowrap;
-  max-width: calc(100vw - 32px);
-}
-
-.floating-pill .fp-loss {
-  color: #FF8080;
-  font-weight: 800;
-}
-
-.floating-pill .fp-cta {
-  background: var(--gold);
-  color: #1A1400;
-  padding: 5px 12px;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 800;
-  font-size: 12px;
-}
-
-.floating-pill .fp-close {
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.5);
-  cursor: pointer;
-  font-size: 12px;
-  padding: 0;
-  line-height: 1;
-}
-
 @media (min-width: 601px) {
   .card { padding: 28px; }
   .etf-select-card { padding: 22px 28px; }
@@ -3217,14 +3194,57 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="point-c"><span class="pc-icon">🏅</span> <span class="pc-text"><strong>Redeem your way.</strong> Cash, coins, or jewellery.</span></div>
     </div>
 
-    <div class="testimonials">
-      <div class="tcard">
-        <div class="tcard-text">"Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it to me. Switched to DigiGold the same day."</div>
-        <div class="tcard-meta">Gold ETF investor · 4 years · switched to Gullak</div>
-      </div>
-      <div class="tcard">
-        <div class="tcard-text">"My dad told me ETF is the safest way to hold gold. I sent him this page. He called me back in 10 minutes. We both switched."</div>
-        <div class="tcard-meta">Passive investor · switched with family</div>
+    <div class="testimonials-wrap">
+      <div class="testimonials-track">
+        <div class="tcard">
+          <div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div>
+          <div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES · 4 years</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">My dad said ETF is the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div>
+          <div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">I always thought the expense ratio was negligible. ₹18 lakh over 20 years is not negligible. Not at all.</div>
+          <div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold · 20yr horizon</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said — okay, fair point.</div>
+          <div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div>
+          <div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF · 6 years</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">Ran the calc for ₹50k. Still ₹4 lakh difference. Doesn't matter how small — the math is the math.</div>
+          <div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div>
+        </div>
+        <!-- Duplicates for seamless loop -->
+        <div class="tcard">
+          <div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div>
+          <div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES · 4 years</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">My dad said ETF is the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div>
+          <div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">I always thought the expense ratio was negligible. ₹18 lakh over 20 years is not negligible. Not at all.</div>
+          <div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold · 20yr horizon</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said — okay, fair point.</div>
+          <div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div>
+          <div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF · 6 years</span></div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-text">Ran the calc for ₹50k. Still ₹4 lakh difference. Doesn't matter how small — the math is the math.</div>
+          <div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div>
+        </div>
       </div>
     </div>
 
@@ -3521,16 +3541,6 @@ function calc() {
     }));
   } catch(e) {}
 
-  // Fix 6: Show floating pill after user calculates
-  if (calc.userTriggered && diff > 0) {
-    const pill = document.getElementById('floatingPill');
-    const lossText = document.getElementById('lossHero') ? document.getElementById('lossHero').textContent.trim() : '';
-    if (pill && lossText) {
-      pill.querySelector('.fp-loss').textContent = lossText;
-      pill.style.display = 'flex';
-    }
-  }
-
   calc.userTriggered = false; // reset after all user-triggered actions done
 
   // Insight line — shows below result when DigiGold wins
@@ -3642,12 +3652,5 @@ window.addEventListener('DOMContentLoaded', () => {
   calc();
 });
 </script>
-<!-- FLOATING PILL -->
-<div class="floating-pill" id="floatingPill" style="display:none;">
-  <span>Your ETF costs you <strong class="fp-loss"></strong></span>
-  <a href="https://play.google.com/store/apps/details?id=com.finternet.plutus" target="_blank" rel="noopener" class="fp-cta">Fix it →</a>
-  <button class="fp-close" onclick="document.getElementById('floatingPill').style.display='none'">✕</button>
-</div>
-
 </body>
 </html>
