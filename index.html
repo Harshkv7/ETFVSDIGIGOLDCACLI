@@ -3511,7 +3511,6 @@ function calc() {
   if (calc.userTriggered) {
     const resultCard = document.querySelector('.result-viz-card');
     if (resultCard) setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    calc.userTriggered = false; // reset so dropdown changes don't scroll
   }
 
   // Fix 4: Save to localStorage
@@ -3531,6 +3530,8 @@ function calc() {
       pill.style.display = 'flex';
     }
   }
+
+  calc.userTriggered = false; // reset after all user-triggered actions done
 
   // Insight line — shows below result when DigiGold wins
   const insightLine = document.getElementById('insightLine');
