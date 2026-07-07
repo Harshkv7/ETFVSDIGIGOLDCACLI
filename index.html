@@ -694,7 +694,181 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   text-align: left;
 }
 
-.calc-section { padding: 44px 0 52px; }
+.dropdown-hint {
+  font-size: 8px;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  display: block;
+}
+
+.calc-select-big {
+  width: 100%;
+  height: 56px;
+  border: 1.5px solid var(--green);
+  border-radius: 14px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  color: var(--green);
+  background: #EAF3F2;
+  outline: none;
+  min-width: 0;
+  box-sizing: border-box;
+  appearance: auto;
+}
+
+.slider-block {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-label {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.slider-value-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: white;
+  border: 1.5px solid #E0E5E4;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  min-width: 110px;
+  justify-content: flex-end;
+}
+
+.slider-currency {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.calc-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: #E0E5E4;
+  outline: none;
+  cursor: pointer;
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--green);
+  box-shadow: 0 2px 8px rgba(27,84,80,0.2);
+  cursor: pointer;
+}
+
+.calc-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--green);
+  cursor: pointer;
+}
+
+/* Advanced parameters accordion */
+.calc-advanced {
+  border-top: 1px dashed #E0DACD;
+  padding-top: 12px;
+}
+
+.calc-advanced-summary {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green);
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  user-select: none;
+}
+
+.calc-advanced-summary::-webkit-details-marker { display: none; }
+.calc-advanced[open] .calc-advanced-summary span { transform: rotate(180deg); display: inline-block; }
+
+.calc-advanced-body {
+  padding-top: 14px;
+}
+
+.calc-simple-card {
+  background: white;
+  border: 1.5px solid #E5E9E8;
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.calc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.calc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.calc-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.calc-input {
+  width: 100%;
+  height: 46px;
+  border: 1.5px solid #E0E5E4;
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--text);
+  background: #F8FAFA;
+  outline: none;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.calc-input:focus { border-color: var(--green); }
+
+.custom-charges-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
 .steps-row {
   display: grid;
@@ -3051,90 +3225,90 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     <h2 class="section-title">Calculate Your Difference</h2>
     <p class="calc-counter" id="calcCounter"></p>
 
-    <!-- STEP 1 + 2: SIDE BY SIDE -->
-    <div class="steps-row">
+    <div class="calc-simple-card">
 
-      <!-- STEP 1: ETF SELECTOR -->
-      <div class="etf-select-card">
-        <div class="sc-label">Choose your ETF</div>
-        <select id="etf" onchange="onEtfChange()">
-          <option value="nippon">Nippon India ETF Gold BeES (GOLDBEES)</option>
-          <option value="hdfc">HDFC Gold ETF (HDFCGOLD)</option>
-          <option value="sbi">SBI ETF Gold (SETFGOLD)</option>
-          <option value="icici">ICICI Prudential Gold ETF (GOLDIETF)</option>
-          <option value="kotak">Kotak Gold ETF (KOTAKGOLD)</option>
-          <option value="axis">Axis Gold ETF (AXISGOLD)</option>
-          <option value="zerodha">Zerodha Gold ETF (GOLDCASE)</option>
-          <option value="custom">Custom / Other</option>
-        </select>
-        <div class="chips-drag-row">
-          <div class="total-drag-label">Total drag: <strong id="totalDragVal">0.99%</strong>/yr</div>
-          <div class="anchored-charges chips-locked" id="anchoredCharges">
-            <div class="ac-chip">
-              <span class="ac-chip-lock" id="chipLock1">🔒</span>
-              <span class="ac-chip-label">Expense Ratio</span>
-              <input id="expense" type="number" step="0.01" value="0.79" oninput="updateTotalDrag()" readonly>
-              <span class="ac-chip-pct">%</span>
+      <!-- Row 1: Two dropdowns side by side -->
+      <div class="calc-row">
+        <div class="calc-field">
+          <select id="etf" onchange="onEtfChange()" class="calc-select-big">
+            <option value="nippon">Nippon GOLDBEES</option>
+            <option value="hdfc">HDFC Gold ETF</option>
+            <option value="sbi">SBI ETF Gold</option>
+            <option value="icici">ICICI Gold ETF</option>
+            <option value="kotak">Kotak Gold ETF</option>
+            <option value="axis">Axis Gold ETF</option>
+            <option value="zerodha">Zerodha GOLDCASE</option>
+            <option value="custom">Custom / Other</option>
+          </select>
+          <span class="dropdown-hint dropdown-hint-font" id="etfHint">Exp 0.79% · Track 0.20%</span>
+        </div>
+        <div class="calc-field">
+          <select id="productSelect" onchange="setProduct(this.value)" class="calc-select-big">
+            <option value="digital-gold">Digital Gold</option>
+            <option value="coin">Gold Coin</option>
+            <option value="jewellery">Jewellery</option>
+          </select>
+          <span class="dropdown-hint">6% once, never again</span>
+        </div>
+      </div>
+
+      <!-- Slider: Investment -->
+      <div class="slider-block">
+        <div class="slider-header">
+          <span class="slider-label">Select amount</span>
+          <div class="slider-value-box"><span class="slider-currency">₹</span><span id="principalDisplay">10,00,000</span></div>
+        </div>
+        <input type="range" id="principalSlider" min="100000" max="10000000" step="100000" value="1000000" class="calc-slider" oninput="onPrincipalSlide(this.value)">
+        <input id="principal" type="number" value="1000000" style="display:none;">
+      </div>
+
+      <!-- Slider: Duration -->
+      <div class="slider-block">
+        <div class="slider-header">
+          <span class="slider-label">Select time period</span>
+          <div class="slider-value-box"><span class="slider-currency">Years:</span><span id="yearsDisplay">25</span></div>
+        </div>
+        <input type="range" id="yearsSlider" min="1" max="40" step="1" value="25" class="calc-slider" oninput="onYearsSlide(this.value)">
+        <input id="years" type="number" value="25" oninput="onYearsChange(this.value)" style="display:none;">
+        <span class="years-hint" id="yearsHint"></span>
+      </div>
+
+      <!-- Advanced Parameters collapsed -->
+      <details class="calc-advanced">
+        <summary class="calc-advanced-summary">Advanced Parameters <span>↓</span></summary>
+        <div class="calc-advanced-body">
+          <div class="calc-row">
+            <div class="calc-field">
+              <label class="calc-label">Gold CAGR (%)</label>
+              <input id="cagrVisible" type="number" value="11" class="calc-input" oninput="document.getElementById('cagr').value=this.value; updateCagrLabel();">
             </div>
-            <div class="ac-chip">
-              <span class="ac-chip-lock" id="chipLock2">🔒</span>
-              <span class="ac-chip-label">Tracking Error</span>
-              <input id="tracking" type="number" step="0.01" value="0.20" oninput="updateTotalDrag()" readonly>
-              <span class="ac-chip-pct">%</span>
+          </div>
+          <div id="customCharges" style="display:none;">
+            <div class="calc-row" style="margin-top:10px;">
+              <div class="calc-field">
+                <label class="calc-label">Expense Ratio (%)</label>
+                <input id="expenseVisible" type="number" step="0.01" value="1.00" class="calc-input" oninput="document.getElementById('expense').value=this.value; updateTotalDrag();">
+              </div>
+              <div class="calc-field">
+                <label class="calc-label">Tracking Error (%)</label>
+                <input id="trackingVisible" type="number" step="0.01" value="0.00" class="calc-input" oninput="document.getElementById('tracking').value=this.value; updateTotalDrag();">
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </details>
 
-      <!-- STEP 2: COMPARE AGAINST -->
-      <div class="compare-select-card">
-        <div class="sc-label">Choose comparison</div>
-        <select id="productSelect" onchange="setProduct(this.value)">
-          <option value="digital-gold">Digital Gold</option>
-          <option value="coin">Gold Coin</option>
-          <option value="jewellery">Jewellery</option>
-        </select>
-        <div class="product-detail" id="detail-digital-gold">
-          <p class="product-note">One-time cost: <strong>3% GST + 3% spread = 6%</strong>. No annual charges, ever.</p>
-        </div>
-        <div class="product-detail" id="detail-coin" style="display:none;">
-          <div class="pf-row"><span class="pf-label">Making</span><div class="pf-input-wrap"><input id="coinMaking" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
-          <div class="pf-row"><span class="pf-label">GST</span><div class="pf-input-wrap"><input id="coinGst" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
-          <div class="pf-row"><span class="pf-label">Locker</span><div class="pf-input-wrap"><input id="coinLocker" type="number" step="0.01" value="0.10" class="pf-input"><span class="pf-unit">%/yr</span></div></div>
-        </div>
-        <div class="product-detail" id="detail-jewellery" style="display:none;">
-          <div class="pf-row"><span class="pf-label">Making</span><div class="pf-input-wrap"><input id="jewelMaking" type="number" step="0.1" value="6" class="pf-input"><span class="pf-unit">%</span></div></div>
-          <div class="pf-row"><span class="pf-label">GST</span><div class="pf-input-wrap"><input id="jewelGst" type="number" step="0.1" value="3" class="pf-input"><span class="pf-unit">%</span></div></div>
-          <div class="pf-row"><span class="pf-label">Locker</span><div class="pf-input-wrap"><input id="jewelLocker" type="number" step="0.01" value="0.10" class="pf-input"><span class="pf-unit">%/yr</span></div></div>
-        </div>
-      </div>
+      <!-- Hidden inputs for JS -->
+      <input id="expense" type="number" value="0.79" style="display:none;" readonly>
+      <input id="tracking" type="number" value="0.20" style="display:none;" readonly>
+      <input id="cagr" type="number" value="11" style="display:none;">
+      <div id="anchoredCharges" style="display:none;"><span id="chipLock1"></span><span id="chipLock2"></span><span id="totalDragVal"></span></div>
+      <div id="detail-digital-gold" style="display:none;"></div>
+      <div id="detail-coin" style="display:none;"><input id="coinMaking" type="number" value="3"><input id="coinGst" type="number" value="3"><input id="coinLocker" type="number" value="0.10"></div>
+      <div id="detail-jewellery" style="display:none;"><input id="jewelMaking" type="number" value="6"><input id="jewelGst" type="number" value="3"><input id="jewelLocker" type="number" value="0.10"></div>
 
-    </div>
-
-    <!-- STEP 3: YOUR NUMBERS -->
-    <div class="card playground-card">
-      <div class="pg-label">Your numbers</div>
-      <div class="fields">
-        <div class="field">
-          <label>Investment (₹)</label>
-          <input id="principal" type="number" value="1000000">
-        </div>
-        <div class="field">
-          <label>Duration (Years)</label>
-          <input id="years" type="number" value="25" oninput="onYearsChange(this.value)">
-          <span class="years-hint" id="yearsHint"></span>
-        </div>
-      </div>
-      <div class="cagr-toggle">
-        <button class="cagr-toggle-btn" onclick="toggleCagr(this)" type="button">
-          Assuming <strong>11% gold CAGR</strong> · change ↓
-        </button>
-        <div class="cagr-field" id="cagrField" style="display:none;">
-          <label>Expected Gold CAGR (%)</label>
-          <input id="cagr" type="number" value="11" oninput="updateCagrLabel()">
-        </div>
-      </div>
       <button class="calc-btn" onclick="calc.userTriggered=true; calc()">Calculate Difference →</button>
+
     </div>
 
     <!-- RESULTS: DIRECT NUMBER COMPARISON -->
@@ -3462,25 +3636,24 @@ function onEtfChange() {
   const d = ETF_DATA[sel.value];
   const isCustom = sel.value === 'custom';
 
-  const expInput = document.getElementById('expense');
-  const trkInput = document.getElementById('tracking');
-  const charges = document.getElementById('anchoredCharges');
+  // Update hidden inputs used by calc()
+  document.getElementById('expense').value  = d.exp;
+  document.getElementById('tracking').value = d.track;
 
-  expInput.value  = d.exp;
-  trkInput.value  = d.track;
+  // Show/hide custom charges row
+  const customCharges = document.getElementById('customCharges');
+  if (customCharges) {
+    customCharges.style.display = isCustom ? 'grid' : 'none';
+    if (isCustom) {
+      document.getElementById('expenseVisible').value = d.exp;
+      document.getElementById('trackingVisible').value = d.track;
+    }
+  }
 
-  // Toggle editable state
-  expInput.readOnly = !isCustom;
-  trkInput.readOnly = !isCustom;
-
-  if (isCustom) {
-    charges.classList.add('chips-editable');
-    charges.classList.remove('chips-locked');
-    document.querySelectorAll('.ac-chip-lock').forEach(l => l.textContent = '✏️');
-  } else {
-    charges.classList.add('chips-locked');
-    charges.classList.remove('chips-editable');
-    document.querySelectorAll('.ac-chip-lock').forEach(l => l.textContent = '🔒');
+  const hint = document.getElementById('etfHint');
+  if (hint) {
+    if (isCustom) hint.textContent = 'Enter your ETF charges below';
+    else hint.textContent = 'Expense Ratio ' + d.exp + '% · Tracking Error ' + d.track + '%';
   }
 
   updateTotalDrag();
@@ -3699,6 +3872,30 @@ function shareResult() {
   }
 }
 
+function onPrincipalSlide(val) {
+  document.getElementById('principal').value = val;
+  const n = parseInt(val);
+  let display;
+  if (n >= 10000000) display = (n/10000000).toFixed(1) + ' Cr';
+  else if (n >= 100000) display = (n/100000).toFixed(0) + ' L';
+  else display = n.toLocaleString('en-IN');
+  document.getElementById('principalDisplay').textContent = display;
+  // update slider fill
+  const slider = document.getElementById('principalSlider');
+  const pct = (val - slider.min) / (slider.max - slider.min) * 100;
+  slider.style.background = `linear-gradient(to right, var(--green) ${pct}%, #E0E5E4 ${pct}%)`;
+}
+
+function onYearsSlide(val) {
+  document.getElementById('years').value = val;
+  document.getElementById('yearsDisplay').textContent = val;
+  onYearsChange(val);
+  // update slider fill
+  const slider = document.getElementById('yearsSlider');
+  const pct = (val - slider.min) / (slider.max - slider.min) * 100;
+  slider.style.background = `linear-gradient(to right, var(--green) ${pct}%, #E0E5E4 ${pct}%)`;
+}
+
 function updateTotalDrag() {
   const exp = parseFloat(document.getElementById('expense').value) || 0;
   const trk = parseFloat(document.getElementById('tracking').value) || 0;
@@ -3715,7 +3912,10 @@ function toggleCagr(btn) {
 }
 
 function updateCagrLabel() {
-  const val = document.getElementById('cagr').value || '11';
+  const visEl = document.getElementById('cagrVisible');
+  const hidEl = document.getElementById('cagr');
+  if (visEl && hidEl) hidEl.value = visEl.value;
+  const val = hidEl ? hidEl.value : '11';
   const btn = document.querySelector('.cagr-toggle-btn');
   if (btn) btn.innerHTML = 'Assuming <strong>' + val + '% gold CAGR</strong> · change ↓';
 }
@@ -3772,6 +3972,9 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   calc.userTriggered = false;
+  // Init slider fills
+  onPrincipalSlide(document.getElementById('principalSlider').value);
+  onYearsSlide(document.getElementById('yearsSlider').value);
   calc();
 });
 </script>
