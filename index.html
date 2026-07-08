@@ -28,14 +28,21 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .hero { background: var(--green); color: white; padding: 72px 0 64px; text-align: center; }
 .hero h1 { font-size: clamp(36px, 8vw, 64px); font-weight: 800; line-height: 1.08; letter-spacing: -1.5px; margin-bottom: 28px; }
 .hero h1 em { font-style: normal; color: var(--gold); }
-.hero-punch { margin-top: 24px; text-align: left; }
-.hero-example { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 24px; padding: 30px 26px 24px; }
-.hero-example-setup { font-family: 'Poppins', sans-serif; font-size: clamp(20px, 5.5vw, 28px); font-weight: 900; color: white; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.2; }
-.hero-example .prov-math { background: rgba(255,255,255,0.92); border-radius: 14px; padding: 20px 18px; }
-.hero-example .prov-math-gap { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 14px; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.hero-example .pmg-label { color: rgba(255,255,255,0.65); font-size: 13px; font-weight: 600; }
+.hero-punch { margin-top: 32px; text-align: center; }
+
+.hero-example-setup { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 4.5vw, 20px); font-weight: 700; color: rgba(255,255,255,0.7); letter-spacing: -0.3px; margin-bottom: 24px; line-height: 1.2; }
+
+.hero-punch { margin-top: 20px; text-align: left; }
+.hero-example { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18); border-radius: 20px; padding: 24px 20px 20px; }
+.hero-example-setup { font-family: 'Poppins', sans-serif; font-size: clamp(16px, 4.5vw, 22px); font-weight: 900; color: white; letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.2; }
+.hero-example .prov-math { background: rgba(255,255,255,0.92); border-radius: 12px; padding: 16px 14px; }
+.hero-example .prov-math-gap { border-top: 1px solid rgba(255,255,255,0.2); margin-top: 12px; padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.hero-example .pmg-label { color: rgba(255,255,255,0.6); font-size: 12px; font-weight: 600; }
 .hero-example .pmg-val { background: var(--red); color: white; font-family: 'Poppins', sans-serif; font-size: clamp(15px, 4vw, 18px); font-weight: 900; padding: 5px 14px; border-radius: 8px; letter-spacing: -0.3px; }
-.hero-cta-btn { display: block; text-align: center; margin-top: 20px; background: var(--gold); color: #1A1400; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 800; padding: 14px 24px; border-radius: 999px; text-decoration: none; }
+.hero-cta-btn { display: block; text-align: center; margin-top: 18px; background: var(--gold); color: #1A1400; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 800; padding: 13px 22px; border-radius: 999px; text-decoration: none; }
+.pmr-val-good { color: var(--green); }
+.pmr-val-bad { color: var(--red); }
+
 .hero-challenge { margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 6px 0; }
 .hero-challenge .challenge-text { font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.5; width: 100%; }
 .hero-challenge .challenge-text strong { color: rgba(255,255,255,0.75); }
@@ -347,50 +354,166 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .dl-icon { width: 20px; height: 20px; flex-shrink: 0; }
 .dl-apple { display: none; }
 .pitch-banner {
-  background: var(--green);
-  padding: 40px 0;
+  background: linear-gradient(160deg, #1A5450 0%, #0F2B29 100%);
+  padding: 56px 0 52px;
   text-align: center;
   color: white;
 }
 
-.pitch-eyebrow {
+.pitch-badge {
+  display: inline-block;
+  background: rgba(245,200,66,0.15);
+  border: 1px solid rgba(245,200,66,0.35);
+  color: var(--gold);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 10px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
 }
 
 .pitch-headline {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(22px, 5.5vw, 32px);
+  font-size: clamp(32px, 8vw, 52px);
   font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.5px;
-  margin-bottom: 10px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 12px;
   color: white;
 }
 
+.pitch-headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
 .pitch-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.65;
+  margin-bottom: 32px;
+}
+
+.pitch-points {
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.pitch-points li {
   font-size: 14px;
-  color: rgba(255,255,255,0.75);
-  line-height: 1.6;
-  margin-bottom: 22px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
 }
 
 .pitch-cta {
   display: inline-block;
+  width: auto;
   background: var(--gold);
   color: #1A1400;
   font-family: 'Poppins', sans-serif;
   font-size: 16px;
   font-weight: 800;
-  padding: 15px 36px;
+  padding: 16px 48px;
   border-radius: 999px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(242,195,53,0.4);
+  box-shadow: 0 6px 28px rgba(242,195,53,0.4);
+}
+
+.pitch-graphic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.pitch-coin {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #F5C842 0%, #D4A017 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(245,200,66,0.4), inset 0 1px 0 rgba(255,255,255,0.3);
+  flex-shrink: 0;
+}
+
+.pitch-coin-symbol {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #7A4F00;
+  line-height: 1;
+}
+
+.pitch-coin-label {
+  font-size: 8px;
+  font-weight: 700;
+  color: #7A4F00;
+  letter-spacing: 0.05em;
+}
+
+.pitch-graphic-line {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pitch-graphic-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+}
+
+.pitch-phone {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 14px 18px;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.pitch-phone-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+
+.pitch-phone-val {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.pitch-phone-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4ADE80;
+}
+
+.pitch-fine {
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 14px;
 }
 
 .footer { background: var(--green); color: white; text-align: center; padding: 28px 0; }
@@ -625,41 +748,15 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- GULLAK PITCH BANNER — right after result -->
 <section class="pitch-banner" id="pitchBanner" style="display:none;">
   <div class="wrap">
-    <p class="pitch-eyebrow">The alternative with no annual fees</p>
-    <h2 class="pitch-headline">Switch to Digital Gold with Gullak.</h2>
-    <p class="pitch-sub">Same 24K gold. 100% insured. Start with ₹100. Zero annual charges — ever.</p>
+    <div class="pitch-badge">India's #1 Gold Saving App</div>
+    <h2 class="pitch-headline">Switch to Digital Gold<br>with Gullak.</h2>
+    <ul class="pitch-points">
+      <li>&#10003; No annual charges. Ever.</li>
+      <li>&#10003; 24K gold with just &#8377;100</li>
+      <li>&#10003; No lock-in — withdraw anytime</li>
+      <li>&#10003; Redeem as cash, coin or jewellery</li>
+    </ul>
     <button onclick="downloadApp()" class="pitch-cta">Download Gullak</button>
-  </div>
-</section>
-
-<section class="why-section">
-  <div class="wrap">
-    <h2 class="why-headline">Invest in Digital Gold<br>with Gullak.</h2>
-    <p class="why-sub">Same gold. Zero annual fees. Fully secured.</p>
-    <div class="trust-grid">
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">100% Insured Vaults</div><div class="trust-desc">Insured, audited storage</div></div></div>
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">24K, 99.9% Pure Gold</div><div class="trust-desc">BIS Hallmarked</div></div></div>
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Start from &#8377;100</div><div class="trust-desc">No demat. No broker.</div></div></div>
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Redeem Anytime</div><div class="trust-desc">Cash, coins or jewellery</div></div></div>
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Zero Annual Charges</div><div class="trust-desc">One-time cost, nothing after</div></div></div>
-      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">10 Lakh+ Users</div><div class="trust-desc">4.7&#9733; rated on app stores</div></div></div>
-    </div>
-    <div class="testimonials-wrap">
-      <div class="testimonials-track">
-        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. &#8377;18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
-        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said &mdash; okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
-        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">Ran the calc for &#8377;50k. Still &#8377;4 lakh difference. Doesn't matter how small &mdash; the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. &#8377;18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
-        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said &mdash; okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
-        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">Ran the calc for &#8377;50k. Still &#8377;4 lakh difference. Doesn't matter how small &mdash; the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
-      </div>
-    </div>
   </div>
 </section>
 
