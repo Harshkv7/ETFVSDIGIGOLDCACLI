@@ -103,31 +103,25 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   flex-shrink: 0;
 }
 
-.adv-tip:hover { background: var(--green); color: white; }
-
-.adv-tip-text {
-  display: none;
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.55;
-  background: #F4F6F5;
-  border-left: 2px solid var(--green);
-  border-radius: 6px;
-  padding: 8px 10px;
-  margin-bottom: 6px;
-}
-
-.adv-tip-text.open { display: block; }
-
 .adv-section-label {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--green);
-  margin-bottom: 8px;
-  padding-bottom: 6px;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #E8E4DE;
+}
+
+.calc-advanced-body .calc-input {
+  height: 38px;
+  font-size: 13px;
+  padding: 0 10px;
+}
+
+.calc-advanced-body .calc-label {
+  font-size: 9px;
 }
 
 .calc-advanced { border-top: 1px dashed #E0DACD; padding-top: 12px; }
@@ -320,6 +314,53 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .download-btn:hover { transform: translateY(-2px); }
 .dl-icon { width: 20px; height: 20px; flex-shrink: 0; }
 .dl-apple { display: none; }
+.pitch-banner {
+  background: var(--green);
+  padding: 40px 0;
+  text-align: center;
+  color: white;
+}
+
+.pitch-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 10px;
+}
+
+.pitch-headline {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(22px, 5.5vw, 32px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.pitch-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+.pitch-cta {
+  display: inline-block;
+  background: var(--gold);
+  color: #1A1400;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  padding: 15px 36px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(242,195,53,0.4);
+}
+
 .footer { background: var(--green); color: white; text-align: center; padding: 28px 0; }
 .footer-logo { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 800; color: var(--gold); margin-bottom: 5px; }
 .footer-copy { font-size: 12px; color: rgba(255,255,255,0.6); }
@@ -458,13 +499,11 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
             <div class="adv-section-label">ETF Charges</div>
             <div class="calc-row">
               <div class="calc-field">
-                <label class="calc-label">Expense Ratio (%) <span class="adv-tip" onclick="toggleTip('tipER')">?</span></label>
-                <div class="adv-tip-text" id="tipER">Annual fee deducted from your ETF every year. On ₹10L at 0.79%, that's ₹7,900 gone in year one — and it grows as your portfolio grows.</div>
+                <label class="calc-label">Expense Ratio (%) <span class="adv-tip" onclick="document.getElementById('glossary').scrollIntoView({behavior:'smooth'})">?</span></label>
                 <input id="expenseVisible" type="number" step="0.01" value="0.79" class="calc-input" oninput="document.getElementById('expense').value=this.value; updateTotalDrag();">
               </div>
               <div class="calc-field">
-                <label class="calc-label">Tracking Error (%) <span class="adv-tip" onclick="toggleTip('tipTE')">?</span></label>
-                <div class="adv-tip-text" id="tipTE">The gap between gold's actual return and what your ETF delivered. Even if gold rises 11%, your ETF may only give you 10.8%.</div>
+                <label class="calc-label">Tracking Error (%) <span class="adv-tip" onclick="document.getElementById('glossary').scrollIntoView({behavior:'smooth'})">?</span></label>
                 <input id="trackingVisible" type="number" step="0.01" value="0.20" class="calc-input" oninput="document.getElementById('tracking').value=this.value; updateTotalDrag();">
               </div>
             </div>
@@ -546,7 +585,47 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       </div>
       <div class="result-cta" id="resultCta" style="display:none;">
         <p class="compounding-line">Your ETF deducted ~1% as annual charges, every year — on your total balance. As it grew bigger, the deduction grew bigger too.</p>
-        <button class="result-share-btn" id="shareBtn" onclick="shareResult()">Someone told you ETFs are best? Time to reply.</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GULLAK PITCH BANNER — right after result -->
+<section class="pitch-banner" id="pitchBanner" style="display:none;">
+  <div class="wrap">
+    <p class="pitch-eyebrow">The alternative with no annual fees</p>
+    <h2 class="pitch-headline">Switch to Digital Gold with Gullak.</h2>
+    <p class="pitch-sub">Same 24K gold. 100% insured. Start with ₹100. Zero annual charges — ever.</p>
+    <button onclick="downloadApp()" class="pitch-cta">Download Gullak</button>
+  </div>
+</section>
+
+<section class="why-section">
+  <div class="wrap">
+    <h2 class="why-headline">Invest in Digital Gold<br>with Gullak.</h2>
+    <p class="why-sub">Same gold. Zero annual fees. Fully secured.</p>
+    <div class="trust-grid">
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">100% Insured Vaults</div><div class="trust-desc">Insured, audited storage</div></div></div>
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">24K, 99.9% Pure Gold</div><div class="trust-desc">BIS Hallmarked</div></div></div>
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Start from &#8377;100</div><div class="trust-desc">No demat. No broker.</div></div></div>
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Redeem Anytime</div><div class="trust-desc">Cash, coins or jewellery</div></div></div>
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">Zero Annual Charges</div><div class="trust-desc">One-time cost, nothing after</div></div></div>
+      <div class="trust-item"><span class="trust-check">&#10003;</span><div class="trust-body"><div class="trust-title">10 Lakh+ Users</div><div class="trust-desc">4.7&#9733; rated on app stores</div></div></div>
+    </div>
+    <div class="testimonials-wrap">
+      <div class="testimonials-track">
+        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
+        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
+        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. &#8377;18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
+        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said &mdash; okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
+        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
+        <div class="tcard"><div class="tcard-text">Ran the calc for &#8377;50k. Still &#8377;4 lakh difference. Doesn't matter how small &mdash; the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
+        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
+        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
+        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. &#8377;18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
+        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said &mdash; okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
+        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
+        <div class="tcard"><div class="tcard-text">Ran the calc for &#8377;50k. Still &#8377;4 lakh difference. Doesn't matter how small &mdash; the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
       </div>
     </div>
   </div>
@@ -608,43 +687,9 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="why-section">
-  <div class="wrap">
-    <h2 class="why-headline">Invest in Digital Gold<br>with Gullak.</h2>
-    <p class="why-sub">Same gold. Zero annual fees. Fully secured.</p>
-
-    <!-- TRUST MARKERS -->
-    <div class="trust-grid">
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">100% Insured Vaults</div><div class="trust-desc">Insured, audited storage</div></div></div>
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">24K, 99.9% Pure Gold</div><div class="trust-desc">BIS Hallmarked</div></div></div>
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">Start from ₹100</div><div class="trust-desc">No demat. No broker.</div></div></div>
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">Redeem Anytime</div><div class="trust-desc">Cash, coins or jewellery</div></div></div>
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">Zero Annual Charges</div><div class="trust-desc">One-time cost, nothing after</div></div></div>
-      <div class="trust-item"><span class="trust-check">✓</span><div class="trust-body"><div class="trust-title">10 Lakh+ Users</div><div class="trust-desc">4.7★ rated on app stores</div></div></div>
+    <div style="text-align:center; margin-top: 28px;">
+      <button onclick="downloadApp()" class="why-inline-cta">Download Gullak &#8594;</button>
     </div>
-
-    <!-- TESTIMONIALS -->
-    <div class="testimonials-wrap">
-      <div class="testimonials-track">
-        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. ₹18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
-        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said — okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
-        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">Ran the calc for ₹50k. Still ₹4 lakh difference. Doesn't matter how small — the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">Had GOLDBEES for 4 years. Ran this calculator. Forwarded it to the guy who recommended it. Switched the same day.</div><div class="tcard-meta"><span class="tcard-name">Rahul M.</span><span class="tcard-tag">Nippon GOLDBEES &middot; 4 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">My dad said ETFs are the safest way to hold gold. I sent him this page. He called back in 10 minutes. We both switched.</div><div class="tcard-meta"><span class="tcard-name">Ananya S.</span><span class="tcard-tag">Passive investor</span></div></div>
-        <div class="tcard"><div class="tcard-text">I always thought the expense ratio was negligible. ₹18 lakh over 20 years is not negligible. Not at all.</div><div class="tcard-meta"><span class="tcard-name">Vikram P.</span><span class="tcard-tag">SBI ETF Gold &middot; 20yr horizon</span></div></div>
-        <div class="tcard"><div class="tcard-text">My CA recommended ETF. I showed him this calculator. He went quiet. Then said — okay, fair point.</div><div class="tcard-meta"><span class="tcard-name">Prerna K.</span><span class="tcard-tag">HDFC Gold ETF</span></div></div>
-        <div class="tcard"><div class="tcard-text">I knew about expense ratios. I just never ran the numbers on 25 years. That's what hit me.</div><div class="tcard-meta"><span class="tcard-name">Arjun T.</span><span class="tcard-tag">Kotak Gold ETF &middot; 6 years</span></div></div>
-        <div class="tcard"><div class="tcard-text">Ran the calc for ₹50k. Still ₹4 lakh difference. Doesn't matter how small — the math is the math.</div><div class="tcard-meta"><span class="tcard-name">Neha R.</span><span class="tcard-tag">First-time investor</span></div></div>
-      </div>
-    </div>
-
-    <button onclick="downloadApp()" class="why-inline-cta">Download Gullak &#8594;</button>
   </div>
 </section>
 
@@ -735,6 +780,12 @@ function onEtfChange() {
     if (isCustom) hint.textContent = 'Edit charges below in Advanced Parameters';
     else hint.textContent = 'Exp ' + d.exp + '% · Track ' + d.track + '%';
   }
+  // Auto-open advanced parameters for custom ETF
+  if (isCustom) {
+    const adv = document.querySelector('.calc-advanced');
+    if (adv) adv.open = true;
+  }
+
   updateTotalDrag();
   calc();
 }
@@ -778,6 +829,12 @@ function setProduct(product) {
       'jewellery': "Jewellery's high making charges take many years to recover. This comparison is most meaningful over 15+ years."
     };
     warningText.textContent = warnings[product] || warnings['digital-gold'];
+  }
+
+  // Auto-open advanced parameters for coin/jewellery
+  if (product === 'coin' || product === 'jewellery') {
+    const adv = document.querySelector('.calc-advanced');
+    if (adv) adv.open = true;
   }
 
   calc();
@@ -860,11 +917,6 @@ function onYearsSlide(val) {
   calc();
 }
 
-function toggleTip(id) {
-  const el = document.getElementById(id);
-  if (el) el.classList.toggle('open');
-}
-
 function updateTotalDrag() {
   const exp = parseFloat(document.getElementById('expense').value) || 0;
   const trk = parseFloat(document.getElementById('tracking').value) || 0;
@@ -935,7 +987,9 @@ function calc() {
   calc.userTriggered = false;
 
   const resultCtaEl = document.getElementById('resultCta');
+  const pitchBanner = document.getElementById('pitchBanner');
   if (resultCtaEl) resultCtaEl.style.display = diff > 0 ? 'block' : 'none';
+  if (pitchBanner) pitchBanner.style.display = diff > 0 ? 'block' : 'none';
 }
 
 function shareResult() {
