@@ -80,7 +80,39 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .slider-block { display: flex; flex-direction: column; gap: 10px; }
 .slider-header { display: flex; align-items: center; justify-content: space-between; }
 .slider-label { font-size: 14px; font-weight: 800; color: var(--text); }
-.slider-value-box { display: flex; align-items: center; gap: 6px; background: white; border: 1.5px solid #E0E5E4; border-radius: 10px; padding: 8px 14px; font-size: 15px; font-weight: 800; font-family: 'Poppins', sans-serif; color: var(--text); min-width: 110px; justify-content: flex-end; }
+.slider-value-box {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: white;
+  border: 1.5px solid #E0E5E4;
+  border-radius: 8px;
+  padding: 6px 10px;
+  width: 90px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.slider-currency {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.slider-value-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text);
+  width: 52px;
+  text-align: right;
+  padding: 0;
+}
 .slider-currency { font-size: 13px; color: var(--muted); font-weight: 600; }
 .calc-slider { width: 100%; -webkit-appearance: none; height: 4px; border-radius: 999px; background: #E0E5E4; outline: none; cursor: pointer; }
 .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: white; border: 2px solid var(--green); box-shadow: 0 2px 8px rgba(27,84,80,0.2); cursor: pointer; }
@@ -469,7 +501,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="slider-block">
         <div class="slider-header">
           <span class="slider-label">Select amount</span>
-          <div class="slider-value-box"><span class="slider-currency">&#8377;</span><span id="principalDisplay">10 L</span></div>
+          <div class="slider-value-box"><span class="slider-currency">&#8377;</span><input type="text" id="principalDisplay" value="10 L" class="slider-value-input" oninput="onPrincipalDisplayEdit(this.value)"></div>
         </div>
         <input type="range" id="principalSlider" min="100000" max="10000000" step="100000" value="1000000" class="calc-slider" oninput="onPrincipalSlide(this.value)">
         <input id="principal" type="number" value="1000000" style="display:none;">
@@ -477,7 +509,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <div class="slider-block">
         <div class="slider-header">
           <span class="slider-label">Select time period</span>
-          <div class="slider-value-box"><span class="slider-currency">Years:</span><span id="yearsDisplay">25</span></div>
+          <div class="slider-value-box"><span class="slider-currency">Yrs:</span><input type="number" id="yearsDisplay" value="25" min="1" max="40" class="slider-value-input" oninput="onYearsDisplayEdit(this.value)"></div>
         </div>
         <input type="range" id="yearsSlider" min="1" max="40" step="1" value="25" class="calc-slider" oninput="onYearsSlide(this.value)">
         <input id="years" type="number" value="25" oninput="onYearsChange(this.value)" style="display:none;">
@@ -893,6 +925,37 @@ function onYearsChange(val) {
   }
 }
 
+function onPrincipalDisplayEdit(val) {
+  // Parse user input — accept "10.5L", "10L", "1Cr", or plain number
+  val = val.trim().replace(/,/g, '');
+  let n;
+  if (/cr/i.test(val)) n = parseFloat(val) * 10000000;
+  else if (/l/i.test(val)) n = parseFloat(val) * 100000;
+  else n = parseFloat(val);
+  if (!isNaN(n) && n > 0) {
+    document.getElementById('principal').value = Math.round(n);
+    const slider = document.getElementById('principalSlider');
+    const clamped = Math.min(Math.max(n, slider.min), slider.max);
+    slider.value = clamped;
+    const pct = (clamped - slider.min) / (slider.max - slider.min) * 100;
+    slider.style.background = 'linear-gradient(to right, var(--green) ' + pct + '%, #E0E5E4 ' + pct + '%)';
+    calc();
+  }
+}
+
+function onYearsDisplayEdit(val) {
+  const y = parseInt(val);
+  if (!isNaN(y) && y > 0 && y <= 40) {
+    document.getElementById('years').value = y;
+    document.getElementById('yearsSlider').value = y;
+    const slider = document.getElementById('yearsSlider');
+    const pct = (y - slider.min) / (slider.max - slider.min) * 100;
+    slider.style.background = 'linear-gradient(to right, var(--green) ' + pct + '%, #E0E5E4 ' + pct + '%)';
+    onYearsChange(y);
+    calc();
+  }
+}
+
 function onPrincipalSlide(val) {
   document.getElementById('principal').value = val;
   const n = parseInt(val);
@@ -900,7 +963,8 @@ function onPrincipalSlide(val) {
   if (n >= 10000000) display = (n/10000000).toFixed(1) + ' Cr';
   else if (n >= 100000) display = (n/100000).toFixed(0) + ' L';
   else display = n.toLocaleString('en-IN');
-  document.getElementById('principalDisplay').textContent = display;
+  const dispEl = document.getElementById('principalDisplay');
+  if (dispEl) dispEl.value = display;
   const slider = document.getElementById('principalSlider');
   const pct = (val - slider.min) / (slider.max - slider.min) * 100;
   slider.style.background = 'linear-gradient(to right, var(--green) ' + pct + '%, #E0E5E4 ' + pct + '%)';
@@ -909,7 +973,8 @@ function onPrincipalSlide(val) {
 
 function onYearsSlide(val) {
   document.getElementById('years').value = val;
-  document.getElementById('yearsDisplay').textContent = val;
+  const dispEl = document.getElementById('yearsDisplay');
+  if (dispEl) dispEl.value = val;
   onYearsChange(val);
   const slider = document.getElementById('yearsSlider');
   const pct = (val - slider.min) / (slider.max - slider.min) * 100;
