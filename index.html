@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+\<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -416,15 +416,40 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  text-align: center;
+  gap: 0;
+  text-align: left;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 32px;
 }
 
 .pitch-points li {
-  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
   font-weight: 600;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.5;
+  color: rgba(255,255,255,0.9);
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  line-height: 1.4;
+}
+
+.pitch-points li:last-child { border-bottom: none; }
+
+.pp-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: #1A1400;
+  font-size: 13px;
+  font-weight: 900;
+  flex-shrink: 0;
 }
 
 .pitch-cta {
@@ -766,10 +791,10 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
     <div class="pitch-badge">India's #1 Gold Saving App</div>
     <h2 class="pitch-headline">Switch to Digital Gold<br>with Gullak.</h2>
     <ul class="pitch-points">
-      <li>&#10003; No annual charges. Ever.</li>
-      <li>&#10003; 24K gold with just &#8377;100</li>
-      <li>&#10003; No lock-in — withdraw anytime</li>
-      <li>&#10003; Redeem as cash, coin or jewellery</li>
+      <li><span class="pp-icon">&#10003;</span><span>No annual charges. Ever.</span></li>
+      <li><span class="pp-icon">&#10003;</span><span>24K gold with just &#8377;100</span></li>
+      <li><span class="pp-icon">&#10003;</span><span>No lock-in — withdraw anytime</span></li>
+      <li><span class="pp-icon">&#10003;</span><span>Redeem as cash, coin or jewellery</span></li>
     </ul>
     <button onclick="downloadApp()" class="pitch-cta">Download Gullak</button>
   </div>
