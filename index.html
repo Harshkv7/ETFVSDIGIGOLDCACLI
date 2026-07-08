@@ -176,9 +176,23 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .calc-input:focus { border-color: var(--green); }
 .result-viz-card { margin-top: 0; background: white; border: 1.5px solid #E5E9E8; border-radius: var(--radius); padding: 28px 22px; position: relative; }
 .viz-hero { text-align: center; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px dashed #E8E4DE; }
-.vlb-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AAA; margin-bottom: 10px; }
-.viz-hero-num { font-family: 'Poppins', sans-serif; font-size: clamp(44px, 13vw, 72px); font-weight: 900; color: var(--red); letter-spacing: -2px; line-height: 1; }
-.viz-hero-num.counting { animation: hero-num-pulse 0.9s ease-out; }
+.vlb-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #AAA; margin-bottom: 6px; }
+.viz-hero-emoji { font-size: 24px; display: block; margin-bottom: 4px; animation: shake 0.5s ease-in-out 0.7s both; }
+.viz-hero-num { font-family: 'Poppins', sans-serif; font-size: clamp(60px, 18vw, 96px); font-weight: 900; color: var(--red); letter-spacing: -3px; line-height: 1; }
+.viz-hero-num.counting { animation: loss-slam 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+@keyframes loss-slam {
+  0%   { transform: scale(0.5); opacity: 0; }
+  65%  { transform: scale(1.1); opacity: 1; }
+  82%  { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+@keyframes shake {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-15deg); }
+  40% { transform: rotate(15deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(8deg); }
+}
 @keyframes hero-num-pulse { 0% { transform: scale(0.92); opacity: 0.6; } 40% { transform: scale(1.04); } 100% { transform: scale(1); opacity: 1; } }
 .vs-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 10px; }
 .vs-card { text-align: center; padding: 16px 10px; border-radius: 14px; border: 1px solid; }
@@ -723,6 +737,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       </div>
       <div class="viz-hero">
         <div class="vlb-label" id="vlbLabel">Your ETF eats</div>
+        <span class="viz-hero-emoji" id="lossEmoji">🚨</span>
         <div class="viz-hero-num" id="lossHero">&mdash;</div>
       </div>
       <div class="vs-row">
@@ -1132,6 +1147,12 @@ function calc() {
   }
 
   lossEl.classList.add('counting');
+  const emoji = document.getElementById('lossEmoji');
+  if (emoji) {
+    emoji.style.animation = 'none';
+    emoji.offsetHeight;
+    emoji.style.animation = '';
+  }
   animateCountUp(lossEl, Math.abs(diff), 1000);
   animateCountUp(document.getElementById('digiStatVal'), productVal, 1000);
   animateCountUp(document.getElementById('etfStatVal'), etfVal, 1000);
