@@ -85,6 +85,51 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 .calc-slider { width: 100%; -webkit-appearance: none; height: 4px; border-radius: 999px; background: #E0E5E4; outline: none; cursor: pointer; }
 .calc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: white; border: 2px solid var(--green); box-shadow: 0 2px 8px rgba(27,84,80,0.2); cursor: pointer; }
 .calc-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: white; border: 2px solid var(--green); cursor: pointer; }
+.adv-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #E0E5E4;
+  color: var(--muted);
+  font-size: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  margin-left: 3px;
+  vertical-align: middle;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.adv-tip:hover { background: var(--green); color: white; }
+
+.adv-tip-text {
+  display: none;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.55;
+  background: #F4F6F5;
+  border-left: 2px solid var(--green);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+}
+
+.adv-tip-text.open { display: block; }
+
+.adv-section-label {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #E8E4DE;
+}
+
 .calc-advanced { border-top: 1px dashed #E0DACD; padding-top: 12px; }
 .calc-advanced-summary { font-size: 13px; font-weight: 700; color: var(--green); cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px; user-select: none; }
 .calc-advanced-summary::-webkit-details-marker { display: none; }
@@ -371,7 +416,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
             <option value="zerodha">Zerodha GOLDCASE</option>
             <option value="custom">Custom / Other</option>
           </select>
-          <span class="dropdown-hint" id="etfHint">Exp 0.79% &middot; Track 0.20%</span>
         </div>
         <div class="calc-field">
           <select id="productSelect" onchange="setProduct(this.value)" class="calc-select-big">
@@ -379,7 +423,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
             <option value="coin">Gold Coin</option>
             <option value="jewellery">Jewellery</option>
           </select>
-          <span class="dropdown-hint">6% once, never again</span>
         </div>
       </div>
       <div class="slider-block">
@@ -402,24 +445,71 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <details class="calc-advanced">
         <summary class="calc-advanced-summary">Advanced Parameters <span>&#8595;</span></summary>
         <div class="calc-advanced-body">
+
+          <div class="adv-section-label">Gold CAGR</div>
           <div class="calc-row">
             <div class="calc-field">
-              <label class="calc-label">Gold CAGR (%)</label>
+              <label class="calc-label">Expected CAGR (%)</label>
               <input id="cagrVisible" type="number" value="11" class="calc-input" oninput="document.getElementById('cagr').value=this.value; updateCagrLabel();">
             </div>
           </div>
-          <div id="customCharges" style="display:block; margin-top:10px;">
+
+          <div id="customCharges" style="display:block; margin-top:16px;">
+            <div class="adv-section-label">ETF Charges</div>
             <div class="calc-row">
               <div class="calc-field">
-                <label class="calc-label">Expense Ratio (%)</label>
+                <label class="calc-label">Expense Ratio (%) <span class="adv-tip" onclick="toggleTip('tipER')">?</span></label>
+                <div class="adv-tip-text" id="tipER">Annual fee deducted from your ETF every year. On ₹10L at 0.79%, that's ₹7,900 gone in year one — and it grows as your portfolio grows.</div>
                 <input id="expenseVisible" type="number" step="0.01" value="0.79" class="calc-input" oninput="document.getElementById('expense').value=this.value; updateTotalDrag();">
               </div>
               <div class="calc-field">
-                <label class="calc-label">Tracking Error (%)</label>
+                <label class="calc-label">Tracking Error (%) <span class="adv-tip" onclick="toggleTip('tipTE')">?</span></label>
+                <div class="adv-tip-text" id="tipTE">The gap between gold's actual return and what your ETF delivered. Even if gold rises 11%, your ETF may only give you 10.8%.</div>
                 <input id="trackingVisible" type="number" step="0.01" value="0.20" class="calc-input" oninput="document.getElementById('tracking').value=this.value; updateTotalDrag();">
               </div>
             </div>
           </div>
+
+          <div id="coinFields" style="display:none; margin-top:16px;">
+            <div class="adv-section-label">Gold Coin Charges</div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label class="calc-label">Making Charge (%)</label>
+                <input id="coinMaking" type="number" step="0.1" value="3" class="calc-input" oninput="calc()">
+              </div>
+              <div class="calc-field">
+                <label class="calc-label">GST (%)</label>
+                <input id="coinGst" type="number" step="0.1" value="3" class="calc-input" oninput="calc()">
+              </div>
+            </div>
+            <div class="calc-row" style="margin-top:8px;">
+              <div class="calc-field">
+                <label class="calc-label">Annual Storage (%/yr)</label>
+                <input id="coinLocker" type="number" step="0.01" value="0.10" class="calc-input" oninput="calc()">
+              </div>
+            </div>
+          </div>
+
+          <div id="jewelleryFields" style="display:none; margin-top:16px;">
+            <div class="adv-section-label">Jewellery Charges</div>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label class="calc-label">Making Charge (%)</label>
+                <input id="jewelMaking" type="number" step="0.1" value="6" class="calc-input" oninput="calc()">
+              </div>
+              <div class="calc-field">
+                <label class="calc-label">GST (%)</label>
+                <input id="jewelGst" type="number" step="0.1" value="3" class="calc-input" oninput="calc()">
+              </div>
+            </div>
+            <div class="calc-row" style="margin-top:8px;">
+              <div class="calc-field">
+                <label class="calc-label">Annual Storage (%/yr)</label>
+                <input id="jewelLocker" type="number" step="0.01" value="0.10" class="calc-input" oninput="calc()">
+              </div>
+            </div>
+          </div>
+
         </div>
       </details>
       <input id="expense" type="number" value="0.79" style="display:none;" readonly>
@@ -427,14 +517,14 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <input id="cagr" type="number" value="11" style="display:none;">
       <div id="anchoredCharges" style="display:none;"><span id="chipLock1"></span><span id="chipLock2"></span><span id="totalDragVal"></span></div>
       <div id="detail-digital-gold" style="display:none;"></div>
-      <div id="detail-coin" style="display:none;"><input id="coinMaking" type="number" value="3"><input id="coinGst" type="number" value="3"><input id="coinLocker" type="number" value="0.10"></div>
-      <div id="detail-jewellery" style="display:none;"><input id="jewelMaking" type="number" value="6"><input id="jewelGst" type="number" value="3"><input id="jewelLocker" type="number" value="0.10"></div>
+      <div id="detail-coin" style="display:none;"></div>
+      <div id="detail-jewellery" style="display:none;"></div>
       <button class="calc-btn" onclick="calc.userTriggered=true; calc()">Calculate Difference &#8594;</button>
     </div>
 
     <div class="result-viz-card">
       <div id="shortTermWarning" class="short-term-warning" style="display:none;">
-        &#9888;&#65039; Digital Gold's 6% one-time cost takes time to recover. Below ~10 years, ETF may appear cheaper &mdash; gold is a long-term asset.
+        &#9888;&#65039; <span id="warningText">Digital Gold's 6% one-time cost takes time to recover. Below ~10 years, ETF may appear cheaper — gold is a long-term asset.</span>
         <button class="try-longterm-btn" onclick="document.getElementById('yearsSlider').value=20; onYearsSlide(20); calc.userTriggered=true; calc();">Try 20 years instead &#8594;</button>
       </div>
       <div class="viz-hero">
@@ -666,12 +756,30 @@ const PRODUCT_LABELS = {
 function setProduct(product) {
   currentProduct = product;
   document.getElementById('productSelect').value = product;
-  document.querySelectorAll('.product-detail').forEach(d => d.style.display = 'none');
-  const detailEl = document.getElementById('detail-' + product);
-  if (detailEl) detailEl.style.display = 'block';
+
   const label = PRODUCT_LABELS[product];
   document.getElementById('vlbLabel').textContent = 'Your ETF eats';
   document.getElementById('digiStatLabel').textContent = label.name;
+
+  // Show/hide advanced parameter fields based on product
+  const etfFields = document.getElementById('customCharges');
+  const coinFields = document.getElementById('coinFields');
+  const jewelleryFields = document.getElementById('jewelleryFields');
+  if (etfFields) etfFields.style.display = 'block'; // always show ETF charges
+  if (coinFields) coinFields.style.display = product === 'coin' ? 'block' : 'none';
+  if (jewelleryFields) jewelleryFields.style.display = product === 'jewellery' ? 'block' : 'none';
+
+  // Update warning text based on product
+  const warningText = document.getElementById('warningText');
+  if (warningText) {
+    const warnings = {
+      'digital-gold': "Digital Gold's 6% one-time cost takes time to recover. Below ~10 years, ETF may appear cheaper — gold is a long-term asset.",
+      'coin': "Gold Coin's one-time making + GST cost takes time to recover. Short horizons may favour ETFs.",
+      'jewellery': "Jewellery's high making charges take many years to recover. This comparison is most meaningful over 15+ years."
+    };
+    warningText.textContent = warnings[product] || warnings['digital-gold'];
+  }
+
   calc();
 }
 
@@ -716,9 +824,16 @@ function onYearsChange(val) {
   const y = parseInt(val) || 0;
   const hint = document.getElementById('yearsHint');
   if (!hint) return;
-  if (y > 0 && y < 10) hint.textContent = 'Too short — Digital Gold advantage shows after ~10 years.';
-  else if (y >= 10 && y < 15) hint.textContent = 'Digital Gold starts pulling ahead. 15+ years shows full impact.';
-  else hint.textContent = '';
+  const shortThreshold = currentProduct === 'jewellery' ? 15 : 10;
+  const medThreshold = currentProduct === 'jewellery' ? 20 : 15;
+  const name = PRODUCT_LABELS[currentProduct] ? PRODUCT_LABELS[currentProduct].name : 'Digital Gold';
+  if (y > 0 && y < shortThreshold) {
+    hint.textContent = 'Too short — ' + name + ' advantage shows after ~' + shortThreshold + ' years.';
+  } else if (y >= shortThreshold && y < medThreshold) {
+    hint.textContent = name + ' starts pulling ahead. ' + medThreshold + '+ years shows the full impact.';
+  } else {
+    hint.textContent = '';
+  }
 }
 
 function onPrincipalSlide(val) {
@@ -743,6 +858,11 @@ function onYearsSlide(val) {
   const pct = (val - slider.min) / (slider.max - slider.min) * 100;
   slider.style.background = 'linear-gradient(to right, var(--green) ' + pct + '%, #E0E5E4 ' + pct + '%)';
   calc();
+}
+
+function toggleTip(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
 }
 
 function updateTotalDrag() {
