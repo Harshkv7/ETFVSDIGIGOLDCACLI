@@ -375,7 +375,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 }
 
 .pitch-badge {
-  display: inline-block;
+  display: block;
   background: rgba(245,200,66,0.15);
   border: 1px solid rgba(245,200,66,0.35);
   color: var(--gold);
@@ -385,7 +385,11 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
   text-transform: uppercase;
   padding: 5px 14px;
   border-radius: 999px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  margin-top: 28px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .pitch-headline {
@@ -796,7 +800,6 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
 <!-- GULLAK PITCH BANNER — right after result -->
 <section class="pitch-banner" id="pitchBanner" style="display:none;">
   <div class="wrap">
-    <div class="pitch-badge">India's #1 Gold Saving App</div>
     <h2 class="pitch-headline">The best way to<br>invest in Digital Gold.</h2>
     <p class="pitch-subhead">Switch to Digital Gold with Gullak.</p>
     <ul class="pitch-points">
@@ -805,6 +808,7 @@ h1, h2, h3 { font-family: 'Poppins', sans-serif; }
       <li><span class="pp-icon">&#10003;</span><span>No lock-in — withdraw anytime</span></li>
       <li><span class="pp-icon">&#10003;</span><span>Redeem as cash, coin or jewellery</span></li>
     </ul>
+    <div class="pitch-badge">India's #1 Gold Saving App</div>
     <button onclick="downloadApp()" class="pitch-cta">Download Gullak</button>
   </div>
 </section>
